@@ -10,9 +10,11 @@ import com.example.webdev.repositories.HelloRepository;
 @RestController
 public class HelloService {
 	@Autowired
-	HelloRepository repository;	
+	HelloRepository repository;
+	
 	@GetMapping("/api/hello")
 	public Iterable<Hello> findAllHellos() {
 		return repository.findAll();
 	}
+
 }
