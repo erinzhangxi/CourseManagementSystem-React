@@ -13,7 +13,37 @@ public class User {
 	private String username;
 	private String password;
 	private String firstName;
-	private String lasteName;
+	private String lastName;
+	private String dateOfBirth;
+	private String role;
+	private String email;
+	private String phone;
+	
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -38,10 +68,10 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLasteName() {
-		return lasteName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLasteName(String lasteName) {
-		this.lasteName = lasteName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }
