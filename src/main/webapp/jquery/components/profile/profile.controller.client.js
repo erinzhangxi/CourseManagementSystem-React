@@ -29,15 +29,11 @@
             .updateUser(12, user)
             .then(success);
     }
-    
-    function success(response) {
-        if(response === null) {
-            alert('unable to update')
-        } else {
-            alert('success');
-        }
+ 
+    function success() {
+    		return alert('user updated');
     }
-
+    
     function findUserById(userId) {
         userService
             .findUserById(userId)

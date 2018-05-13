@@ -30,8 +30,9 @@ function UserServiceClient() {
             }
         })
         .then(function(response){
-            if(response.bodyUsed) {
-                return response.json();
+        		var re = response.json();
+            if(re.bodyUsed) {
+                return re;
             } else {
                 return null;
             }
