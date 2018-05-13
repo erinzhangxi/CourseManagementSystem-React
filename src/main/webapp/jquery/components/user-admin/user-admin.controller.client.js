@@ -28,12 +28,23 @@
         var password = $('#passwordFld').val();
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
+        var userType;
+
+        if ($("#usertype-faculty").is(":checked")) {
+            userType = "faculty";
+            alert("faculty clicked");
+        }
+        else if ($("#usertype-student").is(":checked")) {
+          userType = "student";
+          alert("student clicked");
+        }
 
         var user = {
             username: username,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            userType: userType
         };
 
         userService
