@@ -1,7 +1,7 @@
 //IIFE
 (function () {
 
-    jQuery(main);
+    $(init);
 
     var $staticEmail;
     var $firstName;
@@ -10,94 +10,45 @@
     var userService = new UserServiceClient();
 
     function init() {
-      $staticEmail = $("#staticEmail");
-      $firstName = $("#firstName");
-      $lastName = $("#lastName");
-      $updateBtn = $("#updateBtn")
-        .click(updateUser);
-      findUserById(12);
+        $staticEmail = $("#staticEmail");
+        $firstName = $("#firstName");
+        $lastName = $("#lastName");
+        $updateBtn = $("#updateBtn")
+            .click(updateUser);
+
+        findUserById(12);
     }
 
     function updateUser() {
-      var user = {
-        firstName = $firstName.val();
-        lastName = $lastName.val();
-      };
-
-      userService.updateUser(12, user);
-    }
-
-
-
-
-
-
-
-    function main() {
-        tbody = $('tbody');
-        template = $('.template');
-        $('#createUser').click(createUser);
-
-        var promise = fetch('http://localhost:8080/api/user');
-        promise.then(function (response) {
-            return response.json();
-        }).then(renderUsers)
-    }
-
-    function createUser() {
-        console.log('createUser');
-
-        var username = $('#usernameFld').val();
-        var password = $('#passwordFld').val();
-        var firstName = $('#firstNameFld').val();
-        var lastName = $('#lastNameFld').val();
-
         var user = {
-            username: username,
-            password: password,
-            firstName: firstName,
-            lastName: lastName
+            firstName: $firstName.val(),
+            lastName: $lastName.val()
         };
 
-        fetch('http://localhost:8080/api/user', {
-            method: 'post',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
-
-        // update all users after create
+        userService
+            .updateUser(12, user)
+            .then(success);
     }
-
-// this is now appending all users; will have redundant users
-    function renderUsers(users) {
-        for(var i=0; i<users.length; i++) {
-            var user = users[i];
-            var clone = template.clone();
-            clone.attr('id', user.id);
-            clone.find('.delete').click(deleteUser);
-            clone.find('.edit').click(editUser);
-            clone.find('.username')
-                .html(user.username);
-            tbody.append(clone);
+    
+    function success(response) {
+        if(response === null) {
+            alert('unable to update')
+        } else {
+            alert('success');
         }
     }
 
-    function deleteUser(event) {
-      var deleteBtn = $(event.currentTarget);
-      var userId = deleteBtn
-        .parent()
-        .parent()
-        .attr('id');
-
-      userService
-        .deleteUser(userId)
-        .then(findAllUsers);
+    function findUserById(userId) {
+        userService
+            .findUserById(userId)
+            .then(renderUser);
     }
-
-    function editUser(event) {
-      console.log('edit user');
-      console.log(event);
+    
+    function renderUser(user) {
+        console.log(user);
+        $staticEmail.val(user.username);
+        $firstName.val(user.firstName);
+        $lastName.val(user.lasteName);
     }
+    
 })();
