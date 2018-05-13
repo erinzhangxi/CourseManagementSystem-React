@@ -3,6 +3,7 @@ package com.example.webdev.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 
-@Entity
+@Entity(name="Student")
 public class Student extends User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
