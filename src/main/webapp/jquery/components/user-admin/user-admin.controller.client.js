@@ -102,8 +102,7 @@
         console.log('editUser');
         console.log(event);
 
-        window.location.replace("./profile.template.client.html");
-        
+        window.location.replace("./profile.template.client.html");   
     }
  
     // NOT SURE IF THIS FUNCTION IS NEEDED HERE, same function exists in profile.controller

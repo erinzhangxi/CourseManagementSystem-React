@@ -3,6 +3,8 @@ package com.example.webdev.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,9 +59,32 @@ public class UserService {
 		return null;
 	}
 	
+	@GetMapping("api/user/{username}")
+	public User findUserByUsername(@PathVariable("username") String username) {
+		Optional<User> data = repository.findUserByUsername(username);
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
+	}
+	
 	@PostMapping("/api/login")
 	public List<User> login(@RequestBody User user) {
 		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
 	}
+	
+
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user, HttpSession session) { 
+		User usr = findUserByUsername(user.getUsername());
+		
+		if (usr == null) {
+			return this.createUser(user);
+		} else {
+			System.out.println("User with the username already exists.");
+			return null;
+		}
+	}
+
 
 }

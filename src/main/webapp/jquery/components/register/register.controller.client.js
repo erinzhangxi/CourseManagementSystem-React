@@ -1,31 +1,38 @@
 (function () {
-    var $emailFld, $usernameFld, $passwordFld, $verifyPasswordFld;
-    var userType;
-   // var $registerBtn;
-    var userService = new UserService();
-    $(main);
+	var $emailFld, $usernameFld, $passwordFld, $verifyPasswordFld;
+	var $userType;
+	var $registerBtn;
+	var userService = new UserServiceClient();
 
-    function main() {
-    	
-    	 	$('#confirmsignup').click(register);
-    	 	
-    }
-    
-    function register() {
-    	 	console.log('register');
-    	 	 emailFld = $('#Email').val();
-    	 	 usernameFld = $('#userid').val();
-    	     passwordFld = $('#password').val();
-    	     verifyPasswordFld = $('#reenterpassword').val();
-    	     
-    	     if ($("#usertype-1").is(":checked")) {
-    	    	 	userType = "faculty";
-    	     }
-    	     else if ($("#usertype-0").is(":checked")) {
-    	        userType = "student";
-    	     }
-    	     
-    	     
-    	       
-    }
+	$(main);
+
+	function main() {
+		$emailFld = $('#email');
+		$usernameFld = $('#userid');
+		$passwordFld = $('#password');
+		$verifyPasswordFld = $('#reenterpassword');
+
+		if ($("#usertype-1").is(":checked")) {
+			$userType = "faculty";
+		}
+		else if ($("#usertype-0").is(":checked")) {
+			$userType = "student";
+		}
+
+		$registerBtn = $('#confirmsignup')
+		.click(register); 	
+	}
+
+	function register() {
+		console.log('register');
+		var user = {
+				username: $usernameFld.val(),
+				password: $passwordFld.val(),
+				email: $emailFld.val(), 
+				role: $userType
+		};
+		console.log(user);
+		
+		userService.register(user);
+	}
 })();

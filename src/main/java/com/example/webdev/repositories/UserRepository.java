@@ -2,6 +2,9 @@ package com.example.webdev.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import com.example.webdev.model.User;
 
@@ -12,4 +15,7 @@ public interface UserRepository
 	Iterable<User> findUserByCredentials(
 		@Param("username") String username, 
 		@Param("password") String password);
+	
+	@Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
+	Optional<User> findUserByUsername(@Param("username") String username);
 }
