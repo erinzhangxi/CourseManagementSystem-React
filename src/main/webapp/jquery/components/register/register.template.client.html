@@ -5,7 +5,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href=
   "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link href="user-admin.style.client.css" rel="stylesheet" />
+<link href="register.style.client.css" rel="stylesheet" />
 
 <title>Insert title here</title>
   <script
@@ -14,7 +14,7 @@
           crossorigin="anonymous"></script>
 
   <script src="../../services/user.service.client.js"></script>
-  <script src="user-admin.controller.client.js"></script>
+  <script src="register.controller.client.js"></script>
 
 </head>
 <body>
@@ -59,67 +59,61 @@
     </div>
 </nav>
 </header>
-<div class="container">
-  <h1 id="title">User Admin</h1>
 
- 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="findById">@</span>
-  </div>
-  <input type="text" class="form-control" placeholder="User ID" aria-label="Username" aria-describedby="findById">
-    <span class="float-right" style="white-space: nowrap">
-      <i id='searchUserById' class="fa-2x fa fa-search wbdv-search"></i> 
- 	 </span>
-</div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Role</th>
-        <th>&nbsp;</th>
-        <th></th>
-      </tr>
-      <tr>
-        <th><input id="usernameFld" class="form-control" placeholder="jdoe"/></th>
-        <th><input id="passwordFld" class="form-control" type="password"/></th>
-        <th><input id="firstNameFld" class="form-control" placeholder="John"/></th>
-        <th><input id="lastNameFld" class="form-control" placeholder="Doe"/></th>
-        <th>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="usertype-faculty" name="usertype-faculty" class="custom-control-input">
-            <label class="custom-control-label" for="usertype-faculty">Faculty</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="usertype-student" name="usertype-faculty" class="custom-control-input">
-            <label class="custom-control-label" for="usertype-student">Student</label>
-        </div>
-      </th>
-        <th><button id="createUser" class="btn btn-success">Create</button></th>
-      </tr>
-    </thead>
-    <tbody class="wbdv-tbody">
-    <tr class="wbdv-template wbdv-user wbdv-hidden">
-      <td class="wbdv-username">ada</td>
-      <td>&nbsp;</td>
-      <td class="wbdv-first-name">Ada</td>
-      <td class="wbdv-last-name">Lovelace</td>
-      <td class="wbdv-role">FACULTY</td>
-      <th class="wbdv-actions">
-        <span class="float-right">
-          <button class="delete btn btn-danger">Delete</button>
-          <button class="edit btn btn-danger">Edit</button>
-        </span>
-      </th>
-   </tr>
- </tbody>
-
-    <tfoot></tfoot>
-  </table>
-  </div>
+ <div class="tab-pane" id="signup">
+ <h1 id="title">Sign Up</h1>
+<div class="control-group">
+              <label class="control-label" for="Email">Email:</label>
+              <div class="controls">
+                <input id="Email" name="Email" class="form-control" type="text" placeholder="webdev-summer1-2018@email.com" class="input-large" required="">
+              </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="userid">Username:</label>
+              <div class="controls">
+                <input id="userid" name="userid" class="form-control" type="text" placeholder="Web Dev" class="input-large" required="">
+              </div>
+            </div>
+            
+            <!-- Password input-->
+            <div class="control-group">
+              <label class="control-label" for="password">Password:</label>
+              <div class="controls">
+                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="">
+                <em>1-8 Characters</em>
+              </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="control-group">
+              <label class="control-label" for="reenterpassword">Re-Enter Password:</label>
+              <div class="controls">
+                <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" class="input-large" required="">
+              </div>
+            </div>
+            
+            <!-- Multiple Radios (inline) -->
+            <br>
+            <div class="control-group">
+              <label class="control-label" for="usertype">User Type</label>
+              <div class="controls">
+                <label class="radio inline" for="usertype-0">
+                  <input type="radio" name="usertype" id="usertype-0" value="student" checked="checked">Student</label>
+                <label class="radio inline" for="usertype-1">
+                  <input type="radio" name="usertype" id="usertype-1" value="faculty">Faculty</label>
+              </div>
+            </div>
+            
+            <!-- Button -->
+            <div class="control-group">
+              <label class="control-label" for="confirmsignup"></label>
+              <div class="controls">
+                <button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
+              </div>
+            </div>
+            </div>
+    
 </body>
 </html>

@@ -5,13 +5,17 @@
 
     var tbody;
     var template;
-    var userService = new UserServiceClient()
+    var userService = new UserServiceClient();
+    var searchId;
 
     function main() {
         tbody = $('tbody');
         template = $('.template');
         $('#createUser').click(createUser);
-
+        
+        searchId = $('#findById').val();
+		var search = $('#searchUserById').click(findUserById);
+	 	
         findAllUsers();
     }
 
@@ -32,11 +36,9 @@
 
         if ($("#usertype-faculty").is(":checked")) {
             userType = "faculty";
-            alert("faculty clicked");
         }
         else if ($("#usertype-student").is(":checked")) {
           userType = "student";
-          alert("student clicked");
         }
 
         var user = {
@@ -61,7 +63,7 @@
             clone.attr('id', user.id);
 
             clone.find('.delete').click(deleteUser);
-            clone.find('.edit').click(editUser);
+            clone.find('.edit').click(updateUser);
 
             clone.find('.username')
                 .html(user.username);
@@ -81,9 +83,21 @@
             .then(findAllUsers);
     }
 
-    function editUser(event) {
+    function updateUser(event) {
         console.log('editUser');
         console.log(event);
+
+        window.location.replace("./profile.template.client.html");
+        
     }
+ 
+    // NOT SURE IF THIS FUNCTION IS NEEDED HERE, same function exists in profile.controller
+    function findUserById() {
+    	 	console.log(id);
+    	 	
+    	 	userService
+    	 		.findUserById(id);
+    }
+     
 
 })();

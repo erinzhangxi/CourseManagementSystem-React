@@ -18,6 +18,7 @@ public class User {
 	private String role;
 	private String email;
 	private String phone;
+	private String userType;
 	
 	public String getDateOfBirth() {
 		return dateOfBirth;
@@ -74,4 +75,13 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
+	
 }
