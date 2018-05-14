@@ -5,6 +5,8 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.updateUser = updateUser;
     this.login = login;
+    this.register = register;
+
     this.url =
         'http://localhost:8080/api/user';
     this.login =
@@ -19,6 +21,10 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
         });
+    }
+    
+    function register() {
+    	
     }
 
     function updateUser(userId, user) {

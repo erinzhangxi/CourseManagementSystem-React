@@ -46,9 +46,12 @@
             password: password,
             firstName: firstName,
             lastName: lastName,
-            userType: userType
+            dateOfBirth: "null",
+            role: userType,
+            phone: "null",
+            email: "null"
         };
-
+        
         userService
             .createUser(user)
             .then(findAllUsers);
@@ -65,8 +68,18 @@
             clone.find('.delete').click(deleteUser);
             clone.find('.edit').click(updateUser);
 
-            clone.find('.username')
+            clone.find('.wbdv-username')
                 .html(user.username);
+            
+            clone.find('.wbdv-first-name')
+            .html(user.firstName);
+            
+            clone.find('.wbdv-last-name')
+            .html(user.lastName);
+            
+            clone.find('.wbdv-role')
+            .html(user.role);
+            
             tbody.append(clone);
         }
     }
