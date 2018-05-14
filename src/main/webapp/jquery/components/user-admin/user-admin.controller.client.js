@@ -89,7 +89,9 @@
         var userId = deleteBtn
             .parent()
             .parent()
+            .parent()
             .attr('id');
+        console.log(userId);
 
         userService
             .deleteUser(userId)
