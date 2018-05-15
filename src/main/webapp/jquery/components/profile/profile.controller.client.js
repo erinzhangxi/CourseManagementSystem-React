@@ -3,16 +3,20 @@
 
     $(init);
 
-    var $staticEmail;
-    var $firstName;
-    var $lastName;
+    var $staticUsername;
+    var $phone;
+    var $email;
+    var $dateOfBirth;
+    var $role;
     var $updateBtn;
     var userService = new UserServiceClient();
 
     function init() {
-        $staticEmail = $("#staticEmail");
-        $firstName = $("#firstName");
-        $lastName = $("#lastName");
+        $staticUsername = $("#profile-username");
+        $phone = $("#profile-phone");
+        $email = $("#profile-email");
+        $dateOfBirth = $("#dob");
+        $role = $("#inputRole");
         $updateBtn = $("#updateBtn")
             .click(updateUser);
 
@@ -42,7 +46,7 @@
     
     function renderUser(user) {
         console.log(user);
-        $staticEmail.val(user.username);
+        $staticUsername.val(user.username);
         $firstName.val(user.firstName);
         $lastName.val(user.lasteName);
     }

@@ -26,7 +26,7 @@ public class UserService {
 	public void deleteUser(@PathVariable("userId") int id) {
 		repository.deleteById(id);
 	}
-	
+
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
 		return repository.save(user);
@@ -44,12 +44,12 @@ public class UserService {
 		return null;
 	}
 
-	
+
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
 		return (List<User>) repository.findAll();
 	}
-	
+
 	@GetMapping("/api/user/{userId}")
 	public User findUserById(@PathVariable("userId") int userId) {
 		Optional<User> data = repository.findById(userId);
@@ -58,7 +58,7 @@ public class UserService {
 		}
 		return null;
 	}
-	
+
 	@GetMapping("api/user/{username}")
 	public User findUserByUsername(@PathVariable("username") String username) {
 		Optional<User> data = repository.findUserByUsername(username);
@@ -67,18 +67,25 @@ public class UserService {
 		}
 		return null;
 	}
-	
+
 	@PostMapping("/api/login")
-	public List<User> login(@RequestBody User user) {
-		return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
+	public User login(@RequestBody User user, HttpSession session) {
+		
+		 User usr = (User) repository.findUserByCredentials(user.getUsername(), user.getPassword());
+		 if (usr!= null) {
+			 session.setAttribute("currentUser", usr);;
+			 return usr;
+		 }
+		 return null;
 	}
-	
+
 
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user, HttpSession session) { 
 		User usr = findUserByUsername(user.getUsername());
 		
 		if (usr == null) {
+			session.setAttribute("currentUser", user);
 			return this.createUser(user);
 		} else {
 			System.out.println("User with the username already exists.");
@@ -86,5 +93,43 @@ public class UserService {
 		}
 	}
 
+	@GetMapping("/api/session/set/{attr}/{value}")
+	public String setSessionAttribute(
+			@PathVariable("attr") String attr,
+			  @PathVariable("value") String value,
+			  HttpSession session) {
+			session.setAttribute(attr, value);
+			return attr + " = " + value;
+	}
+	
+	@GetMapping("/api/session/get/{attr}")
+	public String getSessionAttribute(
+			@PathVariable ("attr") String attr,
+			HttpSession session) {
+		return (String) session.getAttribute(attr);
+	}
+	
+	@GetMapping("/api/session/invalidate")
+	public String invalidateSession(HttpSession session) {
+		session.invalidate();
+		return "session invalidated";
+	}
+	
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+		User currentUser = (User) session.getAttribute("currentUser");
+		return currentUser;
+	}
+	
+	// TODO 
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User user, HttpSession session) {
+		return null;
+	}
+
+	@PostMapping("/api/logout")
+	public void logout(@RequestBody User user, HttpSession session) {
+		session.invalidate();
+	}
 
 }

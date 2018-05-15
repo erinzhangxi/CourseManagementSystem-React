@@ -33,6 +33,18 @@
 		};
 		console.log(user);
 		
-		userService.register(user);
+		userService
+			.register(user)
+			.then(openProfile);
 	}
+	
+	function openProfile() {
+		alert("Account successfully created.");
+		// read user from db to find user id
+		
+		// redirect to user with the given id
+		window.location.replace("./profile.template.client.html");  
+		
+	}
+	
 })();

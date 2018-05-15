@@ -19,43 +19,50 @@
 
     <form>
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <label for="profile-username" class="col-sm-2 col-form-label">Username</label>
         <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+          <input type="text" readonly class="form-control" id="profile-username" placeholder="username" value="username" readonly>
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <label for="profile-phone" class="col-sm-2 col-form-label">Phone</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+          <input type="text" class="form-control" id="profile-phone" placeholder="Phone">
         </div>
       </div>
       <div class="form-group row">
-        <label for="firstName" class="col-sm-2 col-form-label">
-          First Name
-        </label>
+        <label for="profile-email" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-          <input type="text"
-                 class="form-control"
-                 id="firstName"
-                 placeholder="first name">
+          <input type="text" class="form-control" id="profile-email" placeholder="Email">
         </div>
       </div>
       <div class="form-group row">
-        <label for="lastName"
+     	 <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+     	 <div class="col-sm-10">
+      		<select id="inputRole" class="form-control">
+        		<option selected>Student</option>
+        		<option>Faculty</option>
+      		</select>
+      	</div>
+    </div>
+      <div class="form-group row">
+        <label for="dob"
                class="col-sm-2 col-form-label">
-          Last Name
+          Date Of Birth
         </label>
         <div class="col-sm-10">
           <input type="text"
                  class="form-control"
-                 id="lastName"
-                 placeholder="last">
+                 id="dob"
+                 placeholder="mm/dd/yyyy">
         </div>
       </div>
       <button id="updateBtn"
               type="button"
-              class="btn btn-primary btn-block">Update</button>
+              class="btn btn-success btn-block">Update</button>
+      <button id="logoutBtn"	
+      		  type="button" 
+      		  class="btn btn-danger btn-block">Logout</button>
     </form>
 
   </div>
