@@ -20,7 +20,11 @@
         $updateBtn = $("#updateBtn")
             .click(updateUser);
 
-        findUserById(12);
+        template = $('#template');
+       
+        /*retrieve user from session TODO*/
+        findUserById(112)
+        		.then(renderUser);
     }
 
     function updateUser() {
@@ -30,7 +34,7 @@
         };
 
         userService
-            .updateUser(12, user)
+            .updateUser(112, user)
             .then(success);
     }
  
@@ -46,9 +50,24 @@
     
     function renderUser(user) {
         console.log(user);
+        var clone = template.clone();
+        clone.attr('id', user.id);
+        clone.find('.profile-username')
+        		.html(user.username);
+        clone.find('.profile-phone')
+        		.html(user.phone);
+        clone.find('.profile-email')
+			.html(user.email);
+        clone.find('.inputRole')
+			.val(user.role);
+        clone.find('.dob')
+        		.html(user.dateOfBirth);
+        
         $staticUsername.val(user.username);
-        $firstName.val(user.firstName);
-        $lastName.val(user.lasteName);
+        $phone.val(user.phone);
+        $email.val(user.email);
+        $dateOfBirth.val(user.dataOfBirth);
+        $role.val(user.role);
     }
     
 })();

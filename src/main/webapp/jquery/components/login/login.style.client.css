@@ -6,3 +6,6 @@ header{
 	padding: 40px;	
 }
 
+#loginbox {
+	max-width: 70%;
+}

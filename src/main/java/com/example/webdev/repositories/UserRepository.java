@@ -18,4 +18,7 @@ public interface UserRepository
 	
 	@Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
 	Optional<User> findUserByUsername(@Param("username") String username);
+	
+	@Query("SELECT u FROM User u WHERE LOWER(u.id) = LOWER(:id)")
+	Optional<User> findUserById(@Param("id") int id);
 }

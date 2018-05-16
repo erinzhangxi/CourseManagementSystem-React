@@ -46,10 +46,10 @@
             password: password,
             firstName: firstName,
             lastName: lastName,
-            dateOfBirth: "null",
+            dateOfBirth: "01/01/1990",
             role: userType,
-            phone: "null",
-            email: "null"
+            phone: "617-111-1111",
+            email: "summer1-2018@webdev.com"
         };
         
         userService

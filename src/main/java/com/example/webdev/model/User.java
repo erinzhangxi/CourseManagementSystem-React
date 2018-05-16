@@ -1,8 +1,12 @@
 package com.example.webdev.model;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity 
 public class User {
@@ -14,16 +18,17 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="GMT")
+	private Date dateOfBirth;
 	private String role;
 	private String email;
 	private String phone;
 	
 	
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getRole() {
