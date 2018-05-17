@@ -28,10 +28,13 @@
     }
 
     function updateUser() {
-        var user = {
-            firstName: $firstName.val(),
-            lastName: $lastName.val()
-        };
+    		var user = {
+				username: $staticUsername.val(),
+				phone: $phone.val(),
+				email: $email.val(), 
+				role: $role.val(),
+				dateOfBirth: $dateOfBirth.datepicker({ dateFormat: 'yy-mm-dd' }).val()
+		};
 
         userService
             .updateUser(112, user)
@@ -61,7 +64,7 @@
         clone.find('.inputRole')
 			.val(user.role);
         clone.find('.dob')
-        		.html(user.dateOfBirth);
+        		.datepicker("setDate", new Date(2008,9,03) );
         
         $staticUsername.val(user.username);
         $phone.val(user.phone);
