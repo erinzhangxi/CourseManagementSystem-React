@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import com.example.webdev.model.User;
 import com.example.webdev.repositories.UserRepository;
@@ -69,14 +71,12 @@ public class UserService {
 	}
 
 	@PostMapping("/api/login")
-	public User login(@RequestBody User user, HttpSession session) {
+	public void login(@RequestBody User user, HttpSession session) {
 		
-		 User usr = (User) repository.findUserByCredentials(user.getUsername(), user.getPassword());
-		 if (usr!= null) {
-			 session.setAttribute("currentUser", usr);;
-			 return usr;
-		 }
-		 return null;
+		 this.repository.findUserByCredentials(user.getUsername(), user.getPassword())
+		 	.orElseThrow(
+		 			() -> new UserNotFoundException(user.getId()));
+		 
 	}
 
 
@@ -85,28 +85,12 @@ public class UserService {
 		User usr = findUserByUsername(user.getUsername());
 		
 		if (usr == null) {
-			session.setAttribute("currentUser", user);
+			session.setAttribute("currentUser", usr);
 			return this.createUser(user);
 		} else {
 			System.out.println("User with the username already exists.");
 			return null;
 		}
-	}
-
-	@GetMapping("/api/session/set/{attr}/{value}")
-	public String setSessionAttribute(
-			@PathVariable("attr") String attr,
-			  @PathVariable("value") String value,
-			  HttpSession session) {
-			session.setAttribute(attr, value);
-			return attr + " = " + value;
-	}
-	
-	@GetMapping("/api/session/get/{attr}")
-	public String getSessionAttribute(
-			@PathVariable ("attr") String attr,
-			HttpSession session) {
-		return (String) session.getAttribute(attr);
 	}
 	
 	@GetMapping("/api/session/invalidate")
@@ -122,14 +106,22 @@ public class UserService {
 	}
 	
 	// TODO 
-	@PutMapping("/api/profile")
-	public User updateProfile(@RequestBody User user, HttpSession session) {
-		return null;
-	}
+//	@PutMapping("/api/profile")
+//	public String updateProfile(@RequestBody User user, HttpSession session) {
+//		return null;
+//	}
 
 	@PostMapping("/api/logout")
 	public void logout(@RequestBody User user, HttpSession session) {
 		session.invalidate();
 	}
 
+}
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class UserNotFoundException extends RuntimeException {
+
+	public UserNotFoundException(int userId) {
+		super("could not find user '" + userId + "'.");
+	}
 }

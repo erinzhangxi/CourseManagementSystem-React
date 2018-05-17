@@ -8,6 +8,9 @@ import javax.persistence.Id;
 @Entity(name="Faculty")
 public class Faculty extends User {
 
+	public Faculty(String username, String password) {
+		super(username, password);
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;

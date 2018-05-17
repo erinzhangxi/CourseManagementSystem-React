@@ -13,6 +13,11 @@ import javax.persistence.JoinColumn;
 
 @Entity(name="Student")
 public class Student extends User {
+	public Student(String username, String password) {
+		super(username, password);
+		
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
