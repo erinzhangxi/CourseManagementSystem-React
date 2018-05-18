@@ -15,8 +15,10 @@
         
         searchId = $('#findById').val();
 		var search = $('#searchUserById').click(findUserById);
+		
 	 	
         findAllUsers();
+        
     }
 
     function findAllUsers() {
@@ -98,11 +100,27 @@
             .then(findAllUsers);
     }
 
+   
     function updateUser(event) {
-        console.log('editUser');
-        console.log(event);
+        console.log('editUser')
+        		
+        var editBtn = $(event.currentTarget);
+        // get current row - user id 
+      var userId = editBtn
+      	.parent()
+      	.parent()
+      	.parent()
+      	.attr('id');
+      console.log(userId);
+      
+        // redirect to profile page 
+      window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + userId
 
-        window.location.replace("./profile.template.client.html");   
+//        
+//        userService
+//        .updateUser(userId)
+//        .then(findAllUsers);
+
     }
  
     // NOT SURE IF THIS FUNCTION IS NEEDED HERE, same function exists in profile.controller
