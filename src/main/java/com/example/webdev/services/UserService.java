@@ -111,11 +111,25 @@ public class UserService {
 		return currentUser;
 	}
 	
-	// TODO 
-//	@PutMapping("/api/profile")
-//	public String updateProfile(@RequestBody User user, HttpSession session) {
-//		return null;
-//	}
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User newUser, HttpServletResponse response) {
+		Optional<User> data = repository.findById(newUser.getId());
+        if(data.isPresent()) {
+            User user = data.get();
+            user.setPhone(newUser.getPhone());
+            user.setDateOfBirth(newUser.getDateOfBirth());
+            user.setUsername(newUser.getUsername());
+            user.setFirstName(newUser.getFirstName());
+            user.setLastName(newUser.getLastName());
+            user.setRole(newUser.getRole());
+            user.setEmail(newUser.getEmail());
+            repository.save(user);
+            return user;
+        }
+        
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+        return null;
+	}
 
 	@PostMapping("/api/logout")
 	public void logout(@RequestBody User user, HttpSession session) {

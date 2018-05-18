@@ -11,25 +11,50 @@
     var $updateBtn;
     var userService = new UserServiceClient();
 
+    var userId;
+    
     function init() {
+    	
         $staticUsername = $("#profile-username");
+        $firstName = $("#profile-firstname");
+        $lastName = $("#profile-lastname");
         $phone = $("#profile-phone");
         $email = $("#profile-email");
         $dateOfBirth = $("#dob");
         $role = $("#inputRole");
         $updateBtn = $("#updateBtn")
             .click(updateUser);
+        $logoutBtn = $("#logoutBtn")
+        		.click(logout);
 
         template = $('#template');
-       
-        /*retrieve user from session TODO*/
-        findUserById(112)
+      
+        userId = retrieveID()[0];
+        console.log("User ID: ");
+        console.log(userId);
+        
+        findUserById(userId)
         		.then(renderUser);
     }
 
+    function retrieveID() {
+    		var vars = [], hash; 
+    		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&'); 
+    		
+    		for(var i = 0; i < hashes.length; i++) { 
+    			hash = hashes[i].split('='); vars.push(hash[0]); 
+    			vars[i] = hash[1];
+    			console.log(hash);
+    		}   		
+    		return vars;
+    }
+    
     function updateUser() {
     		var user = {
+    				id: userId,
 				username: $staticUsername.val(),
+				firstName: $firstName.val(),
+				lastName: $lastName.val(),
 				phone: $phone.val(),
 				email: $email.val(), 
 				role: $role.val(),
@@ -37,7 +62,7 @@
 		};
 
         userService
-            .updateUser(112, user)
+            .updateUser(userId, user)
             .then(success);
     }
  
@@ -57,6 +82,10 @@
         clone.attr('id', user.id);
         clone.find('.profile-username')
         		.html(user.username);
+        clone.find('.profile-firstname')
+        		.html(user.firstName);
+        clone.find('.profile-lastname')
+		.html(user.lastName);
         clone.find('.profile-phone')
         		.html(user.phone);
         clone.find('.profile-email')
@@ -71,6 +100,13 @@
         $email.val(user.email);
         $dateOfBirth.val(user.dataOfBirth);
         $role.val(user.role);
+        $firstName.val(user.firstName);
+        $lastName.val(user.lastName);
+    }
+    
+    function logout() {
+    	 	console.log("Log Out");
+         window.location.href = "/jquery/components/login/login.template.client.html"
     }
     
 })();
