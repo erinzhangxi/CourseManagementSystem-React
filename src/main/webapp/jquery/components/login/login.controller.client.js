@@ -14,30 +14,25 @@
 		$loginBtn = $('#btn-login')
 					.click(login);
 		$fbLoginBtn = $('#btn-fblogin');
-		
 	}
-	
 	
 	function login() {
 		var user = {
 				username: $usernameFld.val(),
 				password: $passwordFld.val()
 		};
-		console.log(user);
+		console.log("user login");
+		console.log($usernameFld.val());
+		console.log($passwordFld.val());
 		
 		userService
 			.login(user.username, user.password)
-			.then(getUserSession);
-		
+			.then(function(response) {
+				console.log(response);
+                window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + response.id
+			})
 	}
 	
-	function getUserSession(user) {
-		console.log('getUserSession');
-		console.log(user);
-		
-		
-//		window.location.replace("./profile.template.client.html/");   
-	}
 	
 })();
 

@@ -3,6 +3,7 @@ package com.example.webdev.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,14 +72,19 @@ public class UserService {
 	}
 
 	@PostMapping("/api/login")
-	public void login(@RequestBody User user, HttpSession session) {
+	public User login(@RequestBody User user, HttpServletResponse response) {
 		
-		 this.repository.findUserByCredentials(user.getUsername(), user.getPassword())
-		 	.orElseThrow(
-		 			() -> new UserNotFoundException(user.getId()));
+//		 this.repository.findUserByCredentials(user.getUsername(), user.getPassword())
+//		 	.orElseThrow(
+//		 			() -> new UserNotFoundException(user.getId()));
+		 Optional<User> data = repository.findUserByCredentials(user.getUsername(), user.getPassword());
+	        if(data.isPresent()) {
+	            return data.get();
+	        }
+	        response.setStatus(HttpServletResponse.SC_CONFLICT);
+	        return null;
 		 
 	}
-
 
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user, HttpSession session) { 

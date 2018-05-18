@@ -1,6 +1,4 @@
 package com.example.webdev.model;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,14 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import com.example.webdev.model.UserDeserializer;
 
 @Entity 
-@JsonDeserialize(using = UserDeserializer.class)
-@JsonSerialize(using = UserSerializer.class)
 public class User {
 	
 	@Id
@@ -26,32 +18,32 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="GMT")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="EST")
 	private Date dateOfBirth;
 	private String role;
 	private String email;
 	private String phone;
-	
-	SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-	
-	protected User() {}
+	public User() {
+		
+	}
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-		
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String date) {
-		
-		try {
-			this.dateOfBirth = formatter.parse(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void setDateOfBirth(Date dob) {
+		this.dateOfBirth = dob;
 	}
+	
 	public String getRole() {
 		return role;
 	}
@@ -71,12 +63,6 @@ public class User {
 		this.phone = phone;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getUsername() {
 		return username;
 	}
