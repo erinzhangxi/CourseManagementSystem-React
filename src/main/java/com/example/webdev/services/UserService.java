@@ -54,20 +54,22 @@ public class UserService {
 	}
 
 	@GetMapping("/api/user/id/{userId}")
-	public User findUserById(@PathVariable("userId") int userId) {
+	public User findUserById(@PathVariable("userId") int userId, HttpServletResponse response) {
 		Optional<User> data = repository.findById(userId);
 		if(data.isPresent()) {
 			return data.get();
 		}
+		response.setStatus(HttpServletResponse.SC_CONFLICT);
 		return null;
 	}
 
-	@GetMapping("api/user/{username}")
-	public User findUserByUsername(@PathVariable("username") String username) {
+	@PostMapping("api/user/{username}")
+	public User findUserByUsername(@PathVariable("username") String username, HttpServletResponse response) {
 		Optional<User> data = repository.findUserByUsername(username);
 		if(data.isPresent()) {
 			return data.get();
 		}
+		response.setStatus(HttpServletResponse.SC_CONFLICT);
 		return null;
 	}
 
@@ -86,18 +88,18 @@ public class UserService {
 		 
 	}
 
-	@PostMapping("/api/register")
-	public User register(@RequestBody User user, HttpSession session) { 
-		User usr = findUserByUsername(user.getUsername());
-		
-		if (usr == null) {
-			session.setAttribute("currentUser", usr);
-			return this.createUser(user);
-		} else {
-			System.out.println("User with the username already exists.");
-			return null;
-		}
-	}
+//	@PostMapping("/api/register")
+//	public User register(@RequestBody User user,  HttpServletResponse response) { 
+//		User usr = findUserByUsername(user.getUsername());
+//		
+//		if (usr == null) {
+//			return this.createUser(user);
+//		} 
+//		
+//		response.setStatus(HttpServletResponse.SC_CONFLICT);
+//        return null;
+//		
+//	}
 	
 	@GetMapping("/api/session/invalidate")
 	public String invalidateSession(HttpSession session) {

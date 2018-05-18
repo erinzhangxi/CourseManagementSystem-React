@@ -7,6 +7,7 @@ function UserServiceClient() {
     this.register = register;
     this.login = login;
     this.getUserSession = getUserSession;
+    this.findUserByUsername = findUserByUsername;
 
     this.url =
         'http://localhost:8080/api/user';
@@ -76,6 +77,16 @@ function UserServiceClient() {
                 return response.json();
             });
     }
+    
+    function findUserByUsername(username) {
+    		return fetch(self.url + "/" + username, {
+    			method: 'post',
+            body: JSON.stringify({username:username}),
+            headers: {
+                'content-type': 'application/json'
+            }
+    		})
+    	}		
 
     function deleteUser(userId) {
         return fetch(self.url + '/' + userId, {
@@ -97,6 +108,9 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
+        })
+        .then(function (response) {
+            return response.json();
         });
     }
     

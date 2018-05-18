@@ -33,18 +33,26 @@
 		};
 		console.log(user);
 		
-		userService
-			.register(user)
-			.then(openProfile);
-	}
-	
-	function openProfile() {
-		alert("Account successfully created.");
-		// read user from db to find user id
+//		userService
+//			.findById(user)
+//			.then(function(response) {
+//				console.log(response);
+//                window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + response.id
+//			})
 		
-		// redirect to user with the given id
-		window.location.replace("./profile.template.client.html");  
-		
-	}
+		userService.findUserByUsername(user.username)
+			.then(function (response) { 
+				console.log(response);
+				if(response.status === 409) {
+						userService.createUser(user)
+						.then(function (response) {
+							console.log(response.id);
+							window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + response.id
+						})
+				} else	{
+					alert("Username already exists.");
+				}})
+
+		}
 	
 })();
