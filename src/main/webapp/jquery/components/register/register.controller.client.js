@@ -11,7 +11,16 @@
 		$usernameFld = $('#userid');
 		$passwordFld = $('#password');
 		$verifyPasswordFld = $('#reenterpassword');
+		
 
+		$('#password, #reenterpassword').on('keyup', function () {
+			  if ($('#password').val() == $('#reenterpassword').val()) {
+			    $('#message').html('Matching').css('color', 'green');
+			  } else 
+			    $('#message').html('Not Matching').css('color', 'red');
+			});
+		
+		
 		if ($("#usertype-1").is(":checked")) {
 			$userType = "faculty";
 		}
