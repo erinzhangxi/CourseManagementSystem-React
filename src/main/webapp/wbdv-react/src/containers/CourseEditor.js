@@ -1,5 +1,6 @@
 import React from 'react'
 import ModuleList from './ModuleList'
+import ModuleList2 from './ModuleList2'
 import LessonTabs from './LessonTabs'
 import CourseService from "../services/CourseService";
 
@@ -78,7 +79,7 @@ export default class CourseEditor
       <h2>Editing course: {this.state.courseId}</h2>
       <div className="row">
         <div className="col-4">
-          <ModuleList courseId={this.state.courseId}/>
+          <ModuleList2 courseId={this.state.courseId}/>
         </div>
         <div className="col-8">
           <LessonTabs/>

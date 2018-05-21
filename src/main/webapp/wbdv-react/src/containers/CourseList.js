@@ -53,7 +53,24 @@ class CourseList extends React.Component {
         <h2>Course List</h2>
         <table className="table">
           <thead>
-            <tr><th>Title</th></tr>
+          <tr><th>
+          <div class="container">
+          <div class="row">
+          <div class="col-6">
+          Title
+          </div>
+          <div class="col-2">
+          Owned By
+          </div>
+          <div class="col-3">
+          Last modified by me
+          </div>
+          <div class="col-1">
+          Action
+          </div>
+          </div>
+          </div>
+        </th></tr>
             <tr>
               <th><input onChange={this.titleChanged}
                          className="form-control" id="titleFld"

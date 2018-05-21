@@ -10,8 +10,8 @@ export default class ModuleListItem
             <li className="list-group-item">
             {this.props.title}
             <span className="float-right">
-             <i className="fa fa-trash"></i>
-            <i className="fa fa-pencil"></i>
+             <button><i className="fa fa-trash"></i></button>
+            <button><i className="fa fa-pencil"></i></button>
             </span>
             </li>
     );}}

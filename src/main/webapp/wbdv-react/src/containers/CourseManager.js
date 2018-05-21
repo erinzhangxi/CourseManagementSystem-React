@@ -8,36 +8,42 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 
 export default class CourseManager
-  extends Component {
+extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {courses: ''};
+  }
+
   render() {
     return (
       <Router>
-        <div className="container-fluid">
-          <h1>Course Manager</h1>
+      <div className="container-fluid">
+      <h1>Course Manager</h1>
 
-          <Route path="/courses"
-                 component={CourseList}>
-          </Route>
-          <Route path="/course/:courseId"
-                 component={CourseEditor}>
-          </Route>
+      <Route path="/courses"
+      component={CourseList}>
+      </Route>
+      <Route path="/course/:courseId"
+      component={CourseEditor}>
+      </Route>
 
+      <CourseList/>
 
-        {/*<Route path="/examples">*/}
-            {/*<div>*/}
-              {/*<div className="card-deck">*/}
-                {/*<CourseCard/>*/}
-                {/*<CourseCard/>*/}
-                {/*<CourseCard/>*/}
-                {/*<CourseCard/>*/}
-              {/*</div>*/}
-              {/*<CourseEditor/>*/}
-              {/*<br/>*/}
-              {/*<LessonTabs/>*/}
-              {/*<ModuleList/>*/}
-            {/*</div>*/}
-          {/*</Route>*/}
-        </div>
+      {/*<Route path="/examples">*/}
+      {/*<div>*/}
+      {/*<div className="card-deck">*/}
+      {/*<CourseCard/>*/}
+      {/*<CourseCard/>*/}
+      {/*<CourseCard/>*/}
+      {/*<CourseCard/>*/}
+      {/*</div>*/}
+      {/*<CourseEditor/>*/}
+      {/*<br/>*/}
+      {/*<LessonTabs/>*/}
+      {/*<ModuleList/>*/}
+      {/*</div>*/}
+      {/*</Route>*/}
+      </div>
       </Router>
     )
   }
