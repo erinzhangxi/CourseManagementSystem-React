@@ -8,6 +8,7 @@ class CourseList extends React.Component {
     this.courseService = CourseService.instance;
     this.titleChanged = this.titleChanged.bind(this);
     this.createCourse = this.createCourse.bind(this);
+    this.deleteCourse = this.deleteCourse.bind(this);
   }
   componentDidMount() {
     this.findAllCourses();
@@ -26,10 +27,10 @@ class CourseList extends React.Component {
     console.log("render coruse rows")
     console.log(this.state)
     if(this.state) {
-      courses = this.state.courses.map(
-        function (course) {
-          return <CourseRow key={course.id}
-                            course={course}/>
+      courses = this.state.courses.map((course) => {
+          return <CourseRow course={course}
+                            key={course.id}
+                            delete={this.deleteCourse}/>
         }
       )
     }
@@ -47,6 +48,12 @@ class CourseList extends React.Component {
       .createCourse(this.state.course)
       .then(() => { this.findAllCourses(); });
   }
+  deleteCourse(courseId) {
+    console.log("DELETE COURSE");
+    console.log(courseId);
+    this.courseService
+      .deleteCourse(courseId);
+  }
   render() {
     return (
       <div>
@@ -54,18 +61,18 @@ class CourseList extends React.Component {
         <table className="table">
           <thead>
           <tr><th>
-          <div class="container">
-          <div class="row">
-          <div class="col-6">
+          <div className="container">
+          <div className="row">
+          <div className="col-6">
           Title
           </div>
-          <div class="col-2">
+          <div className="col-2">
           Owned By
           </div>
-          <div class="col-3">
+          <div className="col-2">
           Last modified by me
           </div>
-          <div class="col-1">
+          <div className="col-2">
           Action
           </div>
           </div>
