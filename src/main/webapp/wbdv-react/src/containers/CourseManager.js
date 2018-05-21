@@ -7,7 +7,7 @@ import CourseEditor from './CourseEditor'
 class CourseManager extends Component {
     render() {
         return (
-            <div class="container-fluid">
+            <div className="container-fluid">
                 <h1>Course Manager</h1>
                 <CourseEditor/>
 
