@@ -52,15 +52,13 @@
 		userService.findUserByUsername(user.username)
 			.then(function (response) { 
 				console.log(response);
-				if(response.status == 400) {
-					console.log("400 ERROR RESPONSE");
+				if(response.status === 409) {
 						userService.createUser(user)
 						.then(function (response) {
 							console.log(response.id);
 							window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + response.id
 						})
 				} else	{
-					console.log("User already exists");
 					alert("Username already exists.");
 				}})
 

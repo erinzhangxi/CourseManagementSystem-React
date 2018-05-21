@@ -69,10 +69,8 @@ public class UserService {
 		if(data.isPresent()) {
 			return data.get();
 		}
-		else {
-			response.setStatus(HttpServletResponse.SC_CONFLICT);
-			return null;
-		}
+		response.setStatus(HttpServletResponse.SC_CONFLICT);
+		return null;
 	}
 
 	@PostMapping("/api/login")
@@ -89,6 +87,19 @@ public class UserService {
 	        return null;
 		 
 	}
+
+//	@PostMapping("/api/register")
+//	public User register(@RequestBody User user,  HttpServletResponse response) { 
+//		User usr = findUserByUsername(user.getUsername());
+//		
+//		if (usr == null) {
+//			return this.createUser(user);
+//		} 
+//		
+//		response.setStatus(HttpServletResponse.SC_CONFLICT);
+//        return null;
+//		
+//	}
 	
 	@GetMapping("/api/session/invalidate")
 	public String invalidateSession(HttpSession session) {
@@ -127,4 +138,12 @@ public class UserService {
 		session.invalidate();
 	}
 
+}
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class UserNotFoundException extends RuntimeException {
+
+	public UserNotFoundException(int userId) {
+		super("could not find user '" + userId + "'.");
+	}
 }

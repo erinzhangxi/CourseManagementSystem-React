@@ -4,6 +4,7 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
     this.updateUser = updateUser;
+    this.register = register;
     this.login = login;
     this.getUserSession = getUserSession;
     this.findUserByUsername = findUserByUsername;
@@ -34,7 +35,23 @@ function UserServiceClient() {
                 }
             	});
      }
-        
+    
+    function register(user) {
+    		return fetch('http://localhost:8080/api/register', {
+    			method: 'post',
+    			credentials: 'same-origin',
+    			body: JSON.stringify(user),
+    			headers: {
+    				'content-type': 'application/json'
+    			}
+    		})
+    			.then(function(response) {
+   				 console.log("ok");})
+   			 .catch(function(error) {
+   		        console.log(error);
+   		    })
+    		}
+    
 
     function updateUser(userId, user) {
         return fetch(self.url + '/' + userId, {
@@ -69,14 +86,6 @@ function UserServiceClient() {
                 'content-type': 'application/json'
             }
     		})
-    		.then(function (response) {
-                if(response.status==400) {
-                    return response.json();
-                }
-                else { 
-                		alert("user already exists");
-                }
-            	});
     	}		
 
     function deleteUser(userId) {
