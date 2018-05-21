@@ -18,7 +18,7 @@ class CourseService {
         return response.json();
       });
   }
- 
+
   createCourse(course) {
     return fetch(COURSE_API_URL, {
       body: JSON.stringify(course),
@@ -29,5 +29,32 @@ class CourseService {
     }).then(function (response) {
       return response.json();
     })}
+
+    updateCourseName(courseId, courseName, course) {
+      return fetch(COURSE_API_URL + "/" + courseId, {
+        body: JSON.stringify({
+          title: courseName,
+          created: course.created,
+          modified: course.modified,
+          modules: course.modules
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT'
+      }).then(function (response) {
+        return response.json();
+      })}
+
+      fetchCourse(courseId) {
+        console.log(courseId);
+        return fetch(COURSE_API_URL + "/" + courseId)
+          .then(function(response){
+            console.log("FETCH COURSE NAME");
+
+            return response.json();
+          });
+      }
+
 }
 export default CourseService;
