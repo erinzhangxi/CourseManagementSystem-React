@@ -17,10 +17,15 @@ import com.example.webdev.repositories.CourseRepository;
 public class CourseServices {
 	@Autowired
 	CourseRepository courseRepository;
-	
+
 	@GetMapping("/api/course")
 	public Iterable<Course> findAllCourses() {
-		return courseRepository.findAll(); 
+		return courseRepository.findAll();
+	}
+
+	@GetMapping("/api/course/{courseId}")
+	public void findCourseById(@PathVariable("courseId") int id) {
+		courseRepository.findById(id);
 	}
 
 	@PostMapping("/api/course")
