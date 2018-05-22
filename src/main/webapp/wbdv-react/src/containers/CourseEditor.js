@@ -1,6 +1,5 @@
 import React from 'react'
 import ModuleList from './ModuleList'
-import ModuleList2 from './ModuleList2'
 import LessonTabs from './LessonTabs'
 import CourseService from "../services/CourseService";
 
@@ -20,15 +19,22 @@ export default class CourseEditor
   }
 
   componentDidMount() {
-    console.log("COMPONENT DID MOUNT");
     this.selectCourse
     (this.props.match.params.courseId);
-    console.log(this.state.courseId);
     this.renderCourseName(this.props.match.params.courseId);
+  }
+
+  componentWillReceiveProps(newProps){
+     this.selectCourse
+     	(newProps.match.params.courseId);
+    
   }
 
   selectCourse(courseId) {
     this.setState({courseId: courseId});
+    console.log("AFTER SELECT COURSE");
+    console.log(courseId);
+    console.log(this.state.courseId);
   }
 
   courseNameChange(event) {
@@ -44,11 +50,10 @@ export default class CourseEditor
   }
 
   renderCourseName(courseId) {
-    console.log("render course name");
-    console.log(this.state.course);
     this.courseService
       .fetchCourse(courseId)
       .then((fetchedCourse) => {
+        console.log("render course name");
         console.log(fetchedCourse.title);
         this.setState({course: fetchedCourse});
         this.setState({courseName: fetchedCourse.title});
@@ -79,7 +84,7 @@ export default class CourseEditor
       <h2>Editing course: {this.state.courseId}</h2>
       <div className="row">
         <div className="col-4">
-          <ModuleList2 courseId={this.state.courseId}/>
+          <ModuleList courseId={this.state.courseId}/>
         </div>
         <div className="col-8">
           <LessonTabs/>
