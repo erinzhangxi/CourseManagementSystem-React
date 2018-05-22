@@ -25,16 +25,14 @@ export default class CourseEditor
   }
 
   componentWillReceiveProps(newProps){
+    if (newProps.match.params.courseId !== null) {
      this.selectCourse
      	(newProps.match.params.courseId);
-    
+    }
   }
 
   selectCourse(courseId) {
     this.setState({courseId: courseId});
-    console.log("AFTER SELECT COURSE");
-    console.log(courseId);
-    console.log(this.state.courseId);
   }
 
   courseNameChange(event) {
@@ -53,8 +51,6 @@ export default class CourseEditor
     this.courseService
       .fetchCourse(courseId)
       .then((fetchedCourse) => {
-        console.log("render course name");
-        console.log(fetchedCourse.title);
         this.setState({course: fetchedCourse});
         this.setState({courseName: fetchedCourse.title});
         return fetchedCourse.title;
