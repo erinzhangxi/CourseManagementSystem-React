@@ -31,7 +31,7 @@ public class ModuleService {
 	public Module createModule(
 			@PathVariable("courseId") int courseId,
 			@RequestBody Module newModule) {
-		Optional<Course> data = courseRepository.findById(courseId);
+		Optional<Course> data = courseRepository.findCourseById(courseId);
 		
 		if(data.isPresent()) {
 			Course course = data.get();
@@ -44,7 +44,7 @@ public class ModuleService {
 	@GetMapping("/api/course/{courseId}/module")
 	public List<Module> findAllModulesForCourse(
 			@PathVariable("courseId") int courseId) {
-		Optional<Course> data = courseRepository.findById(courseId);
+		Optional<Course> data = courseRepository.findCourseById(courseId);
 		if(data.isPresent()) {
 			Course course = data.get();
 			return course.getModules();

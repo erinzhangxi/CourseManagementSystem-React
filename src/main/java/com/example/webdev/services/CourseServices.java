@@ -32,7 +32,7 @@ public class CourseServices {
 	@GetMapping("/api/course/{courseId}")
 	public Course findCourseById(@PathVariable("courseId") int id, HttpServletResponse response) {
 		
-		Optional<Course> data = courseRepository.findById(id);
+		Optional<Course> data = courseRepository.findCourseById(id);
 		if(data.isPresent()) {
 			return data.get();
 		}
@@ -56,7 +56,7 @@ public class CourseServices {
 	@PutMapping("/api/course/{courseId}")
 	public Course updateCourseName(@PathVariable("courseId") int courseId,
 																@RequestBody Course newCourse) {
-		Optional<Course> data = courseRepository.findById(courseId);
+		Optional<Course> data = courseRepository.findCourseById(courseId);
 		if(data.isPresent()) {
 			Course course = data.get();
 			course.setTitle(newCourse.getTitle());

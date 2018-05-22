@@ -6,14 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.example.webdev.model.Lesson;
 import com.example.webdev.model.Module;
-import com.example.webdev.model.User;
 
 
+public interface LessonRepository extends CrudRepository<Lesson, Integer>{
 
-public interface ModuleRepository extends CrudRepository<Module, Integer>{
-	@Query("SELECT m FROM Module m WHERE LOWER(m.id) = LOWER(:id)")
-	Optional<Module> findModuleById(@Param("id") int id);
-	
-	
+	@Query("SELECT l FROM Lesson l WHERE LOWER(l.id) = LOWER(:id)")
+	Optional<Lesson> findLessonById(@Param("id") int id);
 }

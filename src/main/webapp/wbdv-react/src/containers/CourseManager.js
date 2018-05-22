@@ -4,6 +4,7 @@ import ModuleList from './ModuleList'
 import LessonTabs from './LessonTabs'
 import CourseEditor from './CourseEditor'
 import CourseList from './CourseList'
+import ModuleEditor from './ModuleEditor'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 
@@ -26,23 +27,10 @@ extends Component {
       <Route path="/course/:courseId"
       component={CourseEditor}>
       </Route>
-
-      <CourseList/>
-
-      {/*<Route path="/examples">*/}
-      {/*<div>*/}
-      {/*<div className="card-deck">*/}
-      {/*<CourseCard/>*/}
-      {/*<CourseCard/>*/}
-      {/*<CourseCard/>*/}
-      {/*<CourseCard/>*/}
-      {/*</div>*/}
-      {/*<CourseEditor/>*/}
-      {/*<br/>*/}
-      {/*<LessonTabs/>*/}
-      {/*<ModuleList/>*/}
-      {/*</div>*/}
-      {/*</Route>*/}
+      <Route path="/course/:courseId/module/:moduleId"
+      component={ModuleEditor}>
+      </Route>
+      
       </div>
       </Router>
     )
