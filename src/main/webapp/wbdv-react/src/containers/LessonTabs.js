@@ -5,6 +5,7 @@ import LessonEditor from "./LessonEditor";
 import LessonTabItem from './../components/LessonTabItem'
 
 export default class LessonTabs
+<<<<<<< HEAD:src/containers/LessonTabs.js
     extends Component {
       constructor(props) {
         super(props);
@@ -93,6 +94,15 @@ export default class LessonTabs
 
         <a className="nav-link active"
         href="#"><i className="fa fa-plus"></i></a>
+=======
+    extends React.Component {
+    render() { return(
+        <ul className="nav nav-tabs">
+        <li className="nav-item"><a className="nav-link active"
+        href="#">Active Tab</a></li>
+        <li className="nav-item"><a className="nav-link"
+        href="#">Another Tab</a></li>
+>>>>>>> f07d652a7d8f1ef0a769598b4faad8216dd82e11:src/main/webapp/wbdv-react/src/containers/LessonTabs.js
         </ul>
 
         {/*TODO Add Lesson Editor here somewhere*/}
