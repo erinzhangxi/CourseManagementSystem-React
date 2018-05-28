@@ -6,11 +6,6 @@ import ModuleEditor from './ModuleEditor'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import LessonEditor from './LessonEditor'
 
-const navbarStyle = {
-        color: 'red',
-        backgroundColor: "blue"
-};
-
 export default class CourseManager
 extends Component {
   constructor(props) {
