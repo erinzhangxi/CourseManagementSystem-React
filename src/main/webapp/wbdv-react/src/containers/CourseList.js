@@ -2,6 +2,10 @@ import React from 'react';
 import CourseRow from "../components/CourseRow";
 import CourseService from "../services/CourseService";
 
+const titleStyle = {
+  color: 'red'
+};
+
 class CourseList extends React.Component {
   constructor() {
     super();
@@ -54,7 +58,7 @@ class CourseList extends React.Component {
   render() {
     return (
       <div>
-        <h2>Course List</h2>
+        <h2 style={titleStyle}>Course List</h2>
         <table className="table">
           <thead>
           <tr><th>

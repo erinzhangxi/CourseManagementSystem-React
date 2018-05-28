@@ -18,15 +18,13 @@ export default class CourseEditor
   }
 
   componentDidMount() {
-    this.selectCourse
-    (this.props.match.params.courseId);
+    this.selectCourse(this.props.match.params.courseId);
     this.renderCourseName(this.props.match.params.courseId);
   }
 
   componentWillReceiveProps(newProps){
     if (newProps.match.params.courseId !== null) {
-     this.selectCourse
-     	(newProps.match.params.courseId);
+     this.selectCourse(newProps.match.params.courseId);
     }
   }
 

@@ -2,6 +2,15 @@ import React from 'react';
 import CourseRow from "../components/CourseRow";
 import CourseService from "../services/CourseService";
 
+const titleStyle= {
+    "fontFamily": "Impact"
+};
+
+const courseList = {
+  "fontFamily":"Arial",
+    "color": '#A9A9A9'
+};
+
 class CourseList extends React.Component {
   constructor() {
     super();
@@ -51,19 +60,19 @@ class CourseList extends React.Component {
   render() {
     return (
       <div>
-        <h2>Course List</h2>
-        <table className="table">
+        <h2 style={titleStyle}>Course List</h2>
+        <table className="table" style={courseList}>
           <thead>
           <tr><th>
           <div className="container">
           <div className="row">
-          <div className="col-6">
+          <div className="col-4">
           Title
           </div>
-          <div className="col-2">
+          <div className="col-3">
           Owned By
           </div>
-          <div className="col-2">
+          <div className="col-3">
           Last modified by me
           </div>
           <div className="col-2">

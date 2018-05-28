@@ -17,16 +17,16 @@ class CourseRow extends React.Component {
 
       <div className="container">
       <div className="row">
-        <div className="col-6">
+        <div className="col-4">
 
         <Link to={`/course/${this.props.course.id}`}>
           {this.props.course.title}
         </Link>
         </div>
-        <div className="col-2">
+        <div className="col-3">
         me
         </div>
-        <div className="col-2">
+        <div className="col-3">
         {this.props.course.modified}
         </div>
         <div className="col-2">

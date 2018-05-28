@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ModuleListItem from '../components/ModuleListItem';
 import ModuleService from '../services/ModuleService'
+import ModuleEditor from './ModuleEditor'
 
 export default class ModuleList extends Component {
   constructor(props) {
@@ -71,8 +72,12 @@ export default class ModuleList extends Component {
     });
     return modules;
   }
+  renderLessons() {
+        return <Route path='/course/:courseId/module/:moduleId' component={ModuleEditor}/>;
+    }
   render() {
     return (
+       <Router>
       <div>
         <h3>Module List for course: {this.state.courseId}</h3>
         <input onChange={this.titleChanged}
@@ -87,6 +92,11 @@ export default class ModuleList extends Component {
           {this.renderListOfModules()}
         </ul>
       </div>
+      <div className='col-8'>
+               {this.renderLessons()}
+           </div>
+           </div>
+      </Router>
     );
   }
 }

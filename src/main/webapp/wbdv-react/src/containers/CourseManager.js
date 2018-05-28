@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import CourseCard from '../components/CourseCard'
 import ModuleList from './ModuleList'
-import LessonTabs from './LessonTabs'
 import CourseEditor from './CourseEditor'
 import CourseList from './CourseList'
 import ModuleEditor from './ModuleEditor'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 
 export default class CourseManager
@@ -17,6 +16,7 @@ extends Component {
 
   render() {
     return (
+
       <Router>
       <div className="container-fluid">
       <h1>Course Manager</h1>
@@ -30,9 +30,7 @@ extends Component {
       <Route path="/course/:courseId/module/:moduleId"
       component={ModuleEditor}>
       </Route>
-      
-      </div>
-      </Router>
+
     )
   }
 }
