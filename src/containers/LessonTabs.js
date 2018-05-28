@@ -12,12 +12,16 @@ extends Component {
     this.state = {
       courseId: '',
       moduleId: '',
+        lesson: { title: '' },
       lessons: []
     };
     this.lessonService = LessonService.instance;
     this.setModuleId = this.setModuleId.bind(this);
     this.setCourseId = this.setCourseId.bind(this);
+    this.createLesson = this.createLesson.bind(this);
+      this.titleChanged = this.titleChanged.bind(this);
   }
+
   setModuleId(moduleId) {
     this.setState({moduleId: moduleId});
   }
@@ -41,6 +45,15 @@ extends Component {
     .then((lessons) => {
       this.setState({lessons: lessons});
     })
+  }
+
+  createLesson() {
+    let lesson = this.state.lesson;
+      this.lessonService
+          .createLesson(this.props.courseId, this.props.moduleId, lesson)
+          .then(() => {
+              this.findAllLessonsForModule();
+          });
   }
 
   deleteLesson(lessonId) {
@@ -68,6 +81,10 @@ extends Component {
       )
     }}
 
+    titleChanged(event) {
+        this.setState({lesson: {title: event.target.value}});
+    }
+
     renderTopics() {
       return <Route path='/course/:courseId/module/:moduleId/lesson/:lessonId' component={LessonEditor}/>;
     }
@@ -75,6 +92,26 @@ extends Component {
       return(
         <Router>
         <div>
+
+          <div className="row">
+            <div className="col-4">
+            <div>
+            <p>Add a new lesson</p>
+        <input onChange={this.titleChanged}
+        value={this.state.lesson.title}
+        placeholder="title"
+        className="form-control"/>
+            <button onClick={this.createLesson} className="btn btn-primary btn-block">
+            <i className="fa fa-plus"></i>
+            </button>
+            <br/>
+
+        </div>
+        </div>
+
+        </div>
+
+
         <ul className="nav nav-tabs">
         {this.renderLessons()}
 
