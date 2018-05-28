@@ -48,8 +48,7 @@ extends Component {
       <Route path="/course/:courseId/module/:moduleId"
       component={ModuleEditor}>
       </Route>
-      <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
-        component={LessonEditor}/>
+     
 
 
       </div>

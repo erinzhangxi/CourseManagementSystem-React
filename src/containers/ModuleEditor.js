@@ -54,8 +54,6 @@ extends React.Component {
             newProps.match.params.moduleId);
           }
 
-
-
           render() {
             return (
               <div>
