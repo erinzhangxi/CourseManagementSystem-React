@@ -65,22 +65,36 @@ export default class CourseEditor
     <div>
     <form>
     <div className="form-group" style={title}>
-      <h5><label htmlFor="courseName">Course Name: </label></h5>
+          <div class="row justify-content-center">
+          <div class="col-4">
+      <p><label htmlFor="courseName">COURSE NAME </label></p>
        <h4> {this.state.courseName}</h4>
-        <input type="courseName"
-              className="form-control"
-              id="courseName"
-              aria-describedby="courseNameHelp"
-              placeholder="Enter course name"
-              onChange={this.courseNameChange}/>
-        <button type="button"
-                className="btn btn-primary"
-                onClick={this.updateCourseName}>Update</button>
+          </div>
+      <div class="col-4">
+          <p>COURSE ID</p>
+      <h4>{this.state.courseId}</h4>
+          </div>
+      </div>
+      <div class="input-group mb-3">
+
+          <input type="courseName"
+      className="form-control"
+      id="courseName"
+      aria-describedby="courseNameHelp"
+      placeholder="Edit course name"
+      onChange={this.courseNameChange}/>
+      <div class="input-group-append">
+
+          <button type="button"
+      className="btn btn-primary"
+      onClick={this.updateCourseName}>Update</button>
+          </div>
+          </div>
+
         <small id="courseNameHelp" className="form-text text-muted">Enter the course name you want to replace with</small>
     </div>
     </form>
 
-      <h2>Editing course: {this.state.courseId}</h2>
         <ModuleList courseId={this.props.match.params.courseId}/>
     </div>
   );}}

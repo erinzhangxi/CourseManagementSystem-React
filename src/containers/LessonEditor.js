@@ -1,4 +1,5 @@
 import React,  {Component} from 'react';
+import TopicPill from './TopicPill'
 
 export default class LessonEditor extends Component {
 
@@ -29,16 +30,6 @@ export default class LessonEditor extends Component {
     render() {
         return (
             <div>
-            <h3>Lesson Editor</h3>
-                <h2>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit,
-                    mi et lacinia lobortis, eros dui bibendum orci, mattis ullamcorper felis ipsum eget ex.
-                    Quisque eget ante urna. Cras et nulla ac tellus tempus vulputate ut sit amet ipsum. Donec id molestie arcu.
-                    Ut id felis nisi. Mauris sollicitudin posuere lacinia. Vestibulum semper lacinia purus vel consectetur.
-                    Phasellus finibus enim velit, et gravida quam maximus id. Fusce porta bibendum magna, quis auctor arcu cursus sit amet.
-                    Phasellus non velit quis sem commodo sodales. Duis diam lorem,
-                    sodales elementum odio eu, cursus tempus mauris. Nullam ac sem blandit, viverra nisi nec,
-                    tempus ex. Pellentesque et felis suscipit, viverra lorem sit amet, fringilla risus.
-                </h2>
+                <TopicPill moduleId={this.state.moduleId} courseId={this.state.courseId} lessonId={this.state.lessonId}/>
             </div>
         )}}

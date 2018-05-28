@@ -4,6 +4,13 @@ import ModuleService from '../services/ModuleService'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ModuleEditor from './ModuleEditor';
 
+const title = {
+    "fontFamily":"Arial",
+    "color": '#A9A9A9',
+    "font-weight": 'bold'
+};
+
+
 {/*props: courseId*/}
 export default class ModuleList extends Component {
   constructor(props) {
@@ -92,7 +99,7 @@ export default class ModuleList extends Component {
       <div className="row">
         <div className="col-4">
         <div>
-          <h3>Module List for course: {this.props.courseId}</h3>
+         <p style={title}>Add a new module</p>
           <input onChange={this.titleChanged}
                  value={this.state.module.title}
                  placeholder="title"
