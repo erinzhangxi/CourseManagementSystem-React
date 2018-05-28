@@ -20,6 +20,7 @@ extends Component {
     this.setCourseId = this.setCourseId.bind(this);
     this.createLesson = this.createLesson.bind(this);
       this.titleChanged = this.titleChanged.bind(this);
+      this.deleteLesson = this.deleteLesson.bind(this);
   }
 
   setModuleId(moduleId) {
@@ -57,12 +58,13 @@ extends Component {
   }
 
   deleteLesson(lessonId) {
-    console.log("In delete lesson");
-    this.lessonService
-    .deleteLesson(lessonId)
-    .then(() => {
-      this.findAllLessonsForModule(this.props.moduleId, this.props.courseId )
-    });
+      if (window.confirm('Are you sure you want to delete?')) {
+          this.lessonService
+              .deleteLesson(lessonId)
+              .then(() => {
+                  this.findAllLessonsForModule()
+              });
+      }
   }
 
   renderLessons() {
