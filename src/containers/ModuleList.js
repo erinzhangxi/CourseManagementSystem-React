@@ -69,7 +69,10 @@ export default class ModuleList extends Component {
 
   createModule() {
     this.moduleService
-      .createModule(this.props.courseId, this.state.module);
+      .createModule(this.props.courseId, this.state.module)
+        .then(() => {
+        this.findAllModulesForCourse();
+    });
   }
   deleteModule(moduleId, courseId) {
     if (window.confirm('Are you sure you want to delete?')) {
