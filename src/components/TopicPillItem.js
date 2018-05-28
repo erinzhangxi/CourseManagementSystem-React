@@ -12,17 +12,25 @@ export default class TopicPillItem
             <Link className="nav-link"
         to={`/course/`+ this.props.courseId+ `/module/`+this.props.moduleId+ `/lesson/`+this.props.lessonId}
         role="pill"
-        data-toggle="pill"
-            >
-        {this.props.module.title}
-    </Link>
-        <span className="float-right">
+        data-toggle="pill" >
 
+            <div className='row'>
+            <div className='col-8'>
+            {this.props.topic.title}
+            </div>
 
-        <button onClick={() => {this.props.delete(this.props.topic.id)}}
+            <div className='col-1'>
+            <button onClick={() => {this.props.delete(this.props.topic.id)}}
         className='btn btn-danger btn-sm'>
             <i className="fa fa-minus"/>
             </button>
-        </span>
-        </li>
+            </div>
+            </div>
+    </Link>
+
+
+
+
+
+            </li>
     );}}

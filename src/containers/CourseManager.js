@@ -45,12 +45,6 @@ extends Component {
       <Route path="/course/:courseId/modules"
       component={ModuleList}>
       </Route>
-      <Route path="/course/:courseId/module/:moduleId"
-      component={ModuleEditor}>
-      </Route>
-     
-
-
       </div>
       </Router>
       </html>

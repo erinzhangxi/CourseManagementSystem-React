@@ -1,5 +1,4 @@
 import React from 'react';
-import LessonService from "../services/LessonService";
 import TopicService from "../services/TopicService"
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import TopicPillItem from "../components/TopicPillItem";
@@ -41,7 +40,7 @@ export default class TopicPill extends React.Component {
         this.topicService
             .createTopic(this.props.courseId, this.props.moduleId, this.props.lessonId, newTopic)
             .then(() => {
-                this.findAllLessonsForModule();
+                this.findAllTopicsForLesson();
             });
     }
     deleteTopic(topicId) {
@@ -76,9 +75,9 @@ export default class TopicPill extends React.Component {
         let topics = this.state.topics.map((topic) => {
             return <TopicPillItem key={topic.id}
             topic={topic}
-            lessonId={this.state.lessonId}
-            moduleId={this.state.moduleId}
-            courseId={this.state.courseId}
+            lessonId={this.props.lessonId}
+            moduleId={this.props.moduleId}
+            courseId={this.props.courseId}
             delete={this.deleteTopic}/>
         });
         return (
