@@ -3,6 +3,11 @@ import ModuleList from './ModuleList'
 import CourseService from "../services/CourseService";
 
 
+const title = {
+    "fontFamily":"Arial",
+    "color": '#A9A9A9'
+};
+
 export default class CourseEditor
   extends React.Component {
 
@@ -42,7 +47,7 @@ export default class CourseEditor
   updateCourseName(){
     this.courseService
       .updateCourseName(this.state.courseId, this.state.courseName, this.state.course)
-      .then(() => { this.renderCourseName(); });
+      .then(() => { this.renderCourseName(this.state.courseId); });
   }
 
   renderCourseName(courseId) {
@@ -59,9 +64,9 @@ export default class CourseEditor
     return (
     <div>
     <form>
-    <div className="form-group">
-      <label htmlFor="courseName">Course Name: </label>
-        {this.state.courseName}
+    <div className="form-group" style={title}>
+      <h5><label htmlFor="courseName">Course Name: </label></h5>
+       <h4> {this.state.courseName}</h4>
         <input type="courseName"
               className="form-control"
               id="courseName"
