@@ -77,7 +77,10 @@ export default class ModuleList extends Component {
   deleteModule(moduleId, courseId) {
     if (window.confirm('Are you sure you want to delete?')) {
     this.moduleService
-      .deleteModule(moduleId);
+      .deleteModule(moduleId)
+        .then(() => {
+            this.findAllModulesForCourse()
+        });
         }
   }
   titleChanged(event) {
