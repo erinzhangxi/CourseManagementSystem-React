@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import App from './../containers/WidgetList'
+
 
 export default class TopicPillItem
     extends React.Component {
@@ -9,10 +11,10 @@ export default class TopicPillItem
             <li className="nav-item active">
 
 
-            <Link className="nav-link"
-        to={`/course/`+ this.props.courseId+ `/module/`+this.props.moduleId+ `/lesson/`+this.props.lessonId}
-        role="pill"
-        data-toggle="pill" >
+                <Link to={`/lesson/${this.props.lesson}/widget/${this.props.widget}`}>
+                   <p>widget goes here</p>
+
+                <App/>
 
             <div className='row'>
             <div className='col-8'>

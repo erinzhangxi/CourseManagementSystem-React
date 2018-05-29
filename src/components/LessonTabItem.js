@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-
 class LessonTabItem extends Component {
 
   render() {
@@ -12,7 +11,7 @@ class LessonTabItem extends Component {
 
       <li className="nav-item">
       <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>{this.props.lesson.title}</Link>
-      <div className="pull-right">
+          <div className="pull-right">
 
       <button onClick={() =>{this.props.delete(this.props.lesson.id)}}>
 
