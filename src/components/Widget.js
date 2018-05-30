@@ -87,7 +87,7 @@ const Widget = ({widget, preview, dispatch}) => {
         </li>
     )
 }
-const WidgetCt = connect(state => ({
+export const WidgetCt = connect(state => ({
     preview: state.preview
 }))(Widget)
 

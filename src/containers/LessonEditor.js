@@ -31,8 +31,8 @@ export default class LessonEditor extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
+
+            <div>
                 <TopicPills moduleId={this.state.moduleId} courseId={this.state.courseId} lessonId={this.state.lessonId}/>
-                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={TopicEditor}></Route>
             </div>
         )}}

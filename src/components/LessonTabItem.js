@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import LessonEditor from './../containers/LessonEditor'
 
 class LessonTabItem extends Component {
 
@@ -9,7 +10,8 @@ class LessonTabItem extends Component {
             <Router>
                 <div>
                     <li className="nav-item">
-                        <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/" component={LessonEditor}></Route>
+                        <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/`}>
                             {this.props.lesson.title}
                         </Link>
                         <div className="pull-right">

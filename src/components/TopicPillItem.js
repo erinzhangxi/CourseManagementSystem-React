@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import WidgetList from './../containers/WidgetList'
+import {WidgetContainer} from "./../containers/WidgetList";
 
 export default class TopicPillItem
     extends React.Component {
@@ -13,7 +13,7 @@ export default class TopicPillItem
                     <div className='col-8'>
                         <Link to={`/lesson/${this.props.lessonId}/widget`}>
                             <Route path="/lesson/:lessonId/widget"
-                            component={WidgetList}>
+                            component={WidgetContainer}>
                             </Route>
                             {this.props.topic.title}
                         </Link>

@@ -29,3 +29,14 @@ export const save = dispatch => (
 export const preview = dispatch => (
     dispatch({type: constants.PREVIEW})
 )
+export const findWidgetsForTopic = (topicId,dispatch) => (
+    fetch("http://localhost:8080/api/topic/TID/widget".replace("TID",topicId))
+        .then(response => (response.json()))
+        .then(widgets => (dispatch(
+            {type:'FIND_WIDGETS_TOPIC',
+                widgets:widgets,topicId:topicId}
+        )))
+)
+export const add = (topicId,dispatch) => (
+    dispatch({type:constants.ADD,topicId:topicId})
+)
