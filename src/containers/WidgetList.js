@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from "../actions"
-import WidgetContainer from '../components/Widget'
+import WidgetCt from '../components/Widget'
 
 class WidgetList extends Component {
     constructor(props) {
@@ -45,8 +45,8 @@ const dispatcherToPropsMapper
     save: () => actions.save(dispatch),
     preview: () => actions.preview(dispatch)
 })
-const App = connect(
+export const WidgetContainer = connect(
     stateToPropertiesMapper,
-    dispatcherToPropsMapper)(WidgetList)
+    dispatcherToPropsMapper)(WidgetList);
 
-export default App
+export default WidgetContainer;

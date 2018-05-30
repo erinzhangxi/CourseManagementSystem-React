@@ -1,11 +1,13 @@
 import React from 'react'
 import LessonTabs from './LessonTabs'
 import LessonService from "../services/LessonService";
+import {Route} from 'react-router-dom'
+import LessonEditor from './LessonEditor'
 
 
 const title = {
     "fontFamily":"Arial",
-    "font-weight": 'bold'
+    "fontWeight": 'bold'
 };
 
 export default class ModuleEditor
@@ -35,24 +37,17 @@ extends React.Component {
   }
 
   componentDidMount() {
-    this.setCourseId(
-      this.props.match.params.courseId);
-
-      this.setModuleId(
-        this.props.match.params.moduleId);
-
-        console.log("MODULEEDITOR");
-        console.log(this.props.match.params.courseId);
-          console.log(this.props.match.params.moduleId);
+    this.setCourseId(this.props.match.params.courseId);
+    this.setModuleId(this.props.match.params.moduleId);
+    console.log("MODULEEDITOR");
+    console.log(this.props.match.params.courseId);
+    console.log(this.props.match.params.moduleId);
   }
 
       componentWillReceiveProps(newProps) {
-        this.setCourseId(
-          newProps.match.params.courseId);
-
-          this.setModuleId(
-            newProps.match.params.moduleId);
-          }
+        this.setCourseId(newProps.match.params.courseId);
+        this.setModuleId(newProps.match.params.moduleId);
+  }
 
           render() {
             return (
@@ -60,5 +55,7 @@ extends React.Component {
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <h4 style={title}>Module {this.props.match.params.moduleId}</h4>
               </nav>
-              <LessonTabs moduleId={this.props.match.params.moduleId} courseId={this.props.match.params.courseId}/></div>
+              <LessonTabs moduleId={this.props.match.params.moduleId} courseId={this.props.match.params.courseId}/>
+                  <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+              </div>
             );}}

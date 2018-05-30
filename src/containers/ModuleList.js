@@ -7,7 +7,7 @@ import ModuleEditor from './ModuleEditor';
 const title = {
     "fontFamily":"Arial",
     "color": '#A9A9A9',
-    "font-weight": 'bold'
+    "fontWeight": 'bold'
 };
 
 
@@ -18,7 +18,7 @@ export default class ModuleList extends Component {
     this.state = {
       module: { title: '' },
       modules: [],
-      currentModule: '',
+      currentModule: 0,
       courseId: this.props.courseId
     };
     this.setCourseId =
@@ -87,14 +87,17 @@ export default class ModuleList extends Component {
     this.setState({module: {title: event.target.value}});
   }
   renderListOfModules() {
+      let setCurrent = this.setCurrentModuleId;
+      let current = this.currentModule;
     let modules = this.state.modules.map((module) => {
-      return <a href='#' key={module.id}
+      return <div key={module.id}
               onClick={()=>this.setCurrentModuleId(module.id)}>
               <ModuleListItem module={module}
                             course={this.props.courseId}
                             moduleId={module.id}
                              key={module.id}
-                             delete={this.deleteModule}/></a>
+                             delete={this.deleteModule}
+                              current={current} setCurrent={setCurrent}/></div>
     });
     return modules;
   }
@@ -122,7 +125,6 @@ export default class ModuleList extends Component {
         <div className="col-8">
 
           <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
-
         </div>
       </div>
 </Router>

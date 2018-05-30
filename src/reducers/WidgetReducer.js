@@ -1,7 +1,7 @@
 import * as constants from "../constants/index"
 
 export const WidgetReducer = (state = {widgets: [], preview: false}, action) => {
-    let newState
+    let newState;
     switch (action.type) {
 
         case constants.PREVIEW:

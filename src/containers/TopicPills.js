@@ -4,7 +4,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import TopicPillItem from "../components/TopicPillItem";
 
 
-export default class TopicPill extends React.Component {
+export default class TopicPills extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,10 +53,12 @@ export default class TopicPill extends React.Component {
         }
     }
     componentDidMount() {
+        this.setCourseId(this.props.courseId);
         this.setLessonId(this.props.lessonId);
         this.setModuleId(this.props.moduleId);
-        this.setCourseId(this.props.courseId);
     }
+
+
     componentWillReceiveProps(newProps) {
         this.setLessonId(newProps.lessonId);
         this.setModuleId(newProps.moduleId);
@@ -64,22 +66,36 @@ export default class TopicPill extends React.Component {
         this.findAllTopicsForLesson(newProps.courseId, newProps.moduleId, newProps.lessonId);
     }
     findAllTopicsForLesson() {
+        let courseId = this.props.courseId;
+        let moduleId = this.props.moduleId;
+        let lessonId = this.props.lessonId;
+
+        if ((courseId !== undefined) && (moduleId !== undefined) && (lessonId !== undefined)) {
         this.topicService
-            .findAllTopicsForLesson(this.props.courseId, this.props.moduleId, this.props.lessonId)
+            .findAllTopicsForLesson(courseId, moduleId, lessonId)
             .then((topics) => {this.setTopics(topics);});
+        } else {
+            this.setTopics([])
+        }
     }
     renderTopics() {
-        if(this.state.topics === null) {
-            return null;
+        let courseId = this.props.courseId;
+        let moduleId = this.props.moduleId;
+        let lessonId = this.props.lessonId;
+        let topics = null;
+
+        console.log("TOPIC PILLS");
+        console.log(this.state.topics);
+        if (this.state) {
+            topics = this.state.topics.map((topic) => {
+                return <TopicPillItem key={topic.id}
+                                      topic={topic}
+                                      lessonId={this.props.lessonId}
+                                      moduleId={this.props.moduleId}
+                                      courseId={this.props.courseId}
+                                      delete={this.deleteTopic}/>
+            });
         }
-        let topics = this.state.topics.map((topic) => {
-            return <TopicPillItem key={topic.id}
-            topic={topic}
-            lessonId={this.props.lessonId}
-            moduleId={this.props.moduleId}
-            courseId={this.props.courseId}
-            delete={this.deleteTopic}/>
-        });
         return (
             topics
         )
@@ -90,31 +106,31 @@ export default class TopicPill extends React.Component {
         } else {
             return (
                 <div>
-                <ul className="nav nav-pills justify-content-right" >
-                {this.renderTopics()}  &nbsp; &nbsp;
-        <li id="addTopicFld" className="nav-item">
-                <a className="nav-link" href="localhost:3000/courses/:courseId/module/:moduleId">
-                <div className='row'>
-                <div className='col-8'>
-                <input className='form-control form-control-sm'
-            id='topicTitleFld'
-            placeholder='New Topic'
-            value={this.state.topic.title}
-            onChange={this.setTopicTitle}/>
-            </div>
-            <div className='col-1'>
-                <button className='btn btn-success btn-sm'
-            onClick={this.createTopic}>
-        <i className="fa fa-plus"/>
-                </button>
-                </div>
-                </div>
-                </a>
-                </li>
-                </ul>
+                    <ul className="nav nav-pills justify-content-right" >
+                        {this.renderTopics()}
+                        <li id="addTopicFld" className="nav-item">
+                            <a className="nav-link" href="localhost:3000/courses/:courseId/module/:moduleId">
+                                <div className='row'>
+                                    <div className='col-8'>
+                                        <input className='form-control form-control-sm'
+                                               id='topicTitleFld'
+                                               placeholder='New Topic'
+                                               value={this.state.topic.title}
+                                               onChange={this.setTopicTitle}/>
+                                    </div>
+                                    <div className='col-1'>
+                                        <button className='btn btn-success btn-sm'
+                                                onClick={this.createTopic}>
+                                            <i className="fa fa-plus"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
 
                 </div>
-        )
+            )
         }
     }
 }

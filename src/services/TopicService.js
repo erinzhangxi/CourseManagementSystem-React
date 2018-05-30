@@ -29,9 +29,7 @@ export default class TopicService {
         });
     }
 
-    findAllTopics() {
 
-    }
     findAllTopicsForLesson(courseId, moduleId,lessonId) {
         return fetch(TOPIC_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID',lessonId))
             .then(function (response) {

@@ -22,9 +22,9 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
                 </select>
                 <h3>Preview</h3>
             </div>
-            {widget.size == 1 && <h1>{widget.text}</h1>}
-            {widget.size == 2 && <h2>{widget.text}</h2>}
-            {widget.size == 3 && <h3>{widget.text}</h3>}
+            {widget.size === 1 && <h1>{widget.text}</h1>}
+            {widget.size === 2 && <h2>{widget.text}</h2>}
+            {widget.size === 3 && <h3>{widget.text}</h3>}
         </div>
     )
 }
@@ -87,8 +87,8 @@ const Widget = ({widget, preview, dispatch}) => {
         </li>
     )
 }
-const WidgetContainer = connect(state => ({
+const WidgetCt = connect(state => ({
     preview: state.preview
 }))(Widget)
 
-export default WidgetContainer
+export default WidgetCt

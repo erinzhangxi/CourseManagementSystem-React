@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import App from './../containers/WidgetList'
-
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import WidgetList from './../containers/WidgetList'
 
 export default class TopicPillItem
     extends React.Component {
@@ -9,30 +9,24 @@ export default class TopicPillItem
     render() {
         return (
             <li className="nav-item active">
+                <div className='row'>
+                    <div className='col-8'>
+                        <Link to={`/lesson/${this.props.lessonId}/widget`}>
+                            <Route path="/lesson/:lessonId/widget"
+                            component={WidgetList}>
+                            </Route>
+                            {this.props.topic.title}
+                        </Link>
+                    </div>
 
-
-                <Link to={`/lesson/${this.props.lesson}/widget/${this.props.widget}`}>
-                   <p>widget goes here</p>
-
-                <App/>
-
-            <div className='row'>
-            <div className='col-8'>
-            {this.props.topic.title}
-            </div>
-
-            <div className='col-1'>
-            <button onClick={() => {this.props.delete(this.props.topic.id)}}
-        className='btn btn-danger btn-sm'>
-            <i className="fa fa-minus"/>
-            </button>
-            </div>
-            </div>
-    </Link>
-
-
-
-
+                    <div className='col-1'>
+                        <button onClick={() => {this.props.delete(this.props.topic.id)}}
+                                className='btn btn-danger btn-sm'>
+                            <i className="fa fa-minus"/>
+                        </button>
+                    </div>
+                </div>
 
             </li>
-    );}}
+        );}}
+

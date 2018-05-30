@@ -1,5 +1,7 @@
 import React,  {Component} from 'react';
-import TopicPill from './TopicPill'
+import TopicPills from './TopicPills'
+import TopicEditor from './TopicEditor'
+import {Route} from 'react-router-dom'
 
 export default class LessonEditor extends Component {
 
@@ -29,7 +31,8 @@ export default class LessonEditor extends Component {
 
     render() {
         return (
-            <div>
-                <TopicPill moduleId={this.state.moduleId} courseId={this.state.courseId} lessonId={this.state.lessonId}/>
+            <div className="container-fluid">
+                <TopicPills moduleId={this.state.moduleId} courseId={this.state.courseId} lessonId={this.state.lessonId}/>
+                <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={TopicEditor}></Route>
             </div>
         )}}
