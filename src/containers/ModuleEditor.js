@@ -4,6 +4,11 @@ import LessonService from "../services/LessonService";
 import {Route} from 'react-router-dom'
 import LessonEditor from './LessonEditor'
 
+import {Provider, connect} from 'react-redux'
+import {createStore} from 'redux'
+import {WidgetReducer} from "../reducers/WidgetReducer";
+import {WidgetContainer} from "./WidgetList";
+let store = createStore(WidgetReducer);
 
 const title = {
     "fontFamily":"Arial",
@@ -56,6 +61,9 @@ extends React.Component {
               <h4 style={title}>Module {this.props.match.params.moduleId}</h4>
               </nav>
               <LessonTabs moduleId={this.props.match.params.moduleId} courseId={this.props.match.params.courseId}/>
-                  <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                  <Provider store={store}>
+                      <WidgetContainer/>
+                  </Provider>
+
               </div>
             );}}

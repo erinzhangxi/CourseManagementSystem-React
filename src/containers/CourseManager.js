@@ -22,21 +22,14 @@ export default class CourseManager
 
                     </nav>
 
-                    <Route path="/courses"
+                    <Route path="/courses/"
                            component={CourseList}>
                     </Route>
+
                     <Route path="/course/:courseId"
                            component={CourseEditor}>
                     </Route>
-                    {/*<Route path="/course/:courseId/modules"*/}
-                           {/*component={ModuleList}>*/}
-                    {/*</Route>*/}
-                    {/*<Route path="/course/:courseId/modules/lesson/:lessonId"*/}
-                           {/*component={TopicPill}>*/}
-                    {/*</Route>*/}
-                    {/*<Route path="/lesson/:lessonId/widget"*/}
-                           {/*component={WidgetList}>*/}
-                    {/*</Route>*/}
+
                 </div>
             </Router>
 

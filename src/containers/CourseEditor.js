@@ -1,8 +1,14 @@
 import React from 'react'
 import ModuleList from './ModuleList'
 import CourseService from "../services/CourseService";
-import {BrowserRouter as Router} from 'react-router-dom'
-import ModuleEditor from './ModuleEditor'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Provider, connect} from 'react-redux'
+import {createStore} from 'redux'
+import {WidgetReducer} from "../reducers/WidgetReducer";
+import {WidgetContainer} from "./WidgetList";
+import LessonTabs from './LessonTabs'
+
+let store = createStore(WidgetReducer);
 
 const title = {
     "fontFamily":"Arial",
@@ -80,7 +86,6 @@ export default class CourseEditor
                                 </div>
 
                                 <div className="input-group mb-3">
-
                                     <input type="courseName"
                                            className="form-control"
                                            id="courseName"
@@ -99,10 +104,10 @@ export default class CourseEditor
                             </div>
                         </form>
                     </div>
-
-                    {/*<ModuleList courseId={this.props.match.params.courseId}/>*/}
                             <ModuleList courseId={this.props.match.params.courseId}/>
 
+
                 </div>
+
             </Router>
         );}}

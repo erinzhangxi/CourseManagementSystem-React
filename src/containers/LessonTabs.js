@@ -1,8 +1,9 @@
 import React,  {Component}  from 'react'
 import LessonService from "../services/LessonService";
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import LessonTabItem from './../components/LessonTabItem'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import LessonEditor from "./LessonEditor";
 
 export default class LessonTabs
     extends Component {
@@ -113,7 +114,7 @@ export default class LessonTabs
                     </ul>
                     <br/>
                     <div className='col-8'>
-
+                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/" component={LessonEditor}></Route>
                     </div>
 
                 </div>

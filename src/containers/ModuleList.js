@@ -4,6 +4,7 @@ import ModuleService from '../services/ModuleService'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ModuleEditor from './ModuleEditor';
 
+
 const title = {
     "fontFamily":"Arial",
     "color": '#A9A9A9',
@@ -105,9 +106,10 @@ export default class ModuleList extends Component {
   render() {
     return (
       <Router>
-      <div className="row">
-        <div className="col-4">
+          <div className="row">
+              <div className="col-4">
         <div>
+
          <p style={title}>Add a new module</p>
           <input onChange={this.titleChanged}
                  value={this.state.module.title}
@@ -118,14 +120,16 @@ export default class ModuleList extends Component {
           </button>
           <br/>
           <ul className="list-group">
+
             {this.renderListOfModules()}
+
           </ul>
         </div>
-        </div>
-        <div className="col-8">
+              </div>
 
-          <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
-        </div>
+                  <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
+
+
       </div>
 </Router>
     );

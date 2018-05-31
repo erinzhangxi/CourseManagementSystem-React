@@ -2,6 +2,9 @@ import React from 'react';
 import TopicService from "../services/TopicService"
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import TopicPillItem from "../components/TopicPillItem";
+import TopicEditor from './TopicEditor'
+import {Route} from 'react-router-dom'
+import ModuleEditor from "./ModuleEditor";
 
 
 export default class TopicPills extends React.Component {
@@ -105,7 +108,9 @@ export default class TopicPills extends React.Component {
             return null;
         } else {
             return (
+
                 <div>
+                    <div>
                     <ul className="nav nav-pills justify-content-right" >
                         {this.renderTopics()}
                         <li id="addTopicFld" className="nav-item">
@@ -128,6 +133,8 @@ export default class TopicPills extends React.Component {
                             </a>
                         </li>
                     </ul>
+                        </div>
+
 
                 </div>
             )

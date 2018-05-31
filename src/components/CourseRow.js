@@ -7,7 +7,6 @@ class CourseRow extends React.Component {
     this.state={id:''};
   }
 
-
   ComponentDidMount() {
     this.setState({id: this.props.course.id});
   }

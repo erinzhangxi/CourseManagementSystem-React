@@ -54,13 +54,17 @@ class TopicEditor extends React.Component{
     render(){
 
         return(
-            <Provider store={store}>
-                <WidgetContainer courseId={this.state.courseId}
-                                 moduleId={this.state.moduleId}
-                                 lessonId={this.state.lessonId}
-                                 topicId={this.state.topicId}
-                />
-            </Provider>)
+            <div>
+
+            {/*<Provider store={store}>*/}
+                {/*<WidgetContainer courseId={this.state.courseId}*/}
+                                 {/*moduleId={this.state.moduleId}*/}
+                                 {/*lessonId={this.state.lessonId}*/}
+                                 {/*topicId={this.state.topicId}*/}
+                {/*/>*/}
+            {/*</Provider>)*/}
+            </div>
+    )
 
     }
 }

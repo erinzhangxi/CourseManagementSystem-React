@@ -58,6 +58,7 @@ const Widget = ({widget, preview, dispatch}) => {
     let selectElement
     return(
         <li>
+            <h1>######WIDGET RENDERING######</h1>
             <div hidden={preview}>
                 {widget.id} {widget.widgetType}
 
