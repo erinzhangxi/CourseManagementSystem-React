@@ -5,16 +5,16 @@ import {WidgetContainer} from "./../containers/WidgetList";
 
 export default class TopicPillItem
     extends React.Component {
+    constructor(props) {
+        super(props);
+    };
 
     render() {
         return (
             <li className="nav-item active">
                 <div className='row'>
                     <div className='col-8'>
-                        <Link to={`/lesson/${this.props.lessonId}/widget`}>
-                            <Route path="/lesson/:lessonId/widget"
-                            component={WidgetContainer}>
-                            </Route>
+                        <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topic.id}/widget`}>
                             {this.props.topic.title}
                         </Link>
                     </div>

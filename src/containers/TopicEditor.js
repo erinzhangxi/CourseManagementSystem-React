@@ -36,34 +36,17 @@ class TopicEditor extends React.Component{
         this.setTopicId(newProps.match.params.topicId);
     }
 
-    setTopicId(topicId){
-        this.setState({topicId:topicId})
-    }
-
-    setCourseId(courseId){
-        this.setState({courseId:courseId});
-    }
-
-    setModuleId(moduleId){
-        this.setState({moduleId:moduleId});
-    }
-
-    setLessonId(lessonId){
-        this.setState({lessonId:lessonId})
-    }
+    setTopicId(topicId){ this.setState({topicId:topicId}) }
+    setCourseId(courseId){ this.setState({courseId:courseId});}
+    setModuleId(moduleId){ this.setState({moduleId:moduleId});}
+    setLessonId(lessonId){ this.setState({lessonId:lessonId})}
 
     render(){
-
         return(
             <div>
-
-            {/*<Provider store={store}>*/}
-                {/*<WidgetContainer courseId={this.state.courseId}*/}
-                                 {/*moduleId={this.state.moduleId}*/}
-                                 {/*lessonId={this.state.lessonId}*/}
-                                 {/*topicId={this.state.topicId}*/}
-                {/*/>*/}
-            {/*</Provider>)*/}
+                <Provider store={store}>
+                    <WidgetContainer/>
+                </Provider>
             </div>
     )
 

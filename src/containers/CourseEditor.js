@@ -2,14 +2,6 @@ import React from 'react'
 import ModuleList from './ModuleList'
 import CourseService from "../services/CourseService";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import {Provider, connect} from 'react-redux'
-import {createStore} from 'redux'
-import {WidgetReducer} from "../reducers/WidgetReducer";
-import {WidgetContainer} from "./WidgetList";
-import LessonTabs from './LessonTabs'
-import ModuleEditor from "./ModuleEditor";
-
-let store = createStore(WidgetReducer);
 
 const title = {
     "fontFamily":"Arial",
@@ -106,7 +98,6 @@ export default class CourseEditor
                         </form>
                     </div>
                         <ModuleList courseId={this.props.match.params.courseId}/>
-
 
 
                 </div>

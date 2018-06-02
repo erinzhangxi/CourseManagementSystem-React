@@ -14,15 +14,16 @@ export default class TopicPills extends React.Component {
             courseId: '',
             moduleId: '',
             lessonId: '',
-            topic: {title: ''},
-            topics: []
+            topicId: '',
+            topics: [],
+            topic: {title: ''}
         };
-
+        this.setModuleId = this.setModuleId.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
+        this.setTopicId = this.setTopicId.bind(this);
         this.deleteTopic = this.deleteTopic.bind(this);
         this.topicService = TopicService.instance;
-        this.setModuleId = this.setModuleId.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
     }
@@ -30,6 +31,7 @@ export default class TopicPills extends React.Component {
     setLessonId(lessonId) { this.setState({lessonId:lessonId});}
     setModuleId(moduleId) { this.setState({moduleId: moduleId});}
     setCourseId(courseId) { this.setState({courseId: courseId});}
+    setTopicId(topicId) { this.setState({topicId: topicId}); }
     setTopicTitle(event) {
         this.setState({topic: {
                 title: event.target.value
@@ -59,6 +61,7 @@ export default class TopicPills extends React.Component {
         this.setCourseId(this.props.courseId);
         this.setLessonId(this.props.lessonId);
         this.setModuleId(this.props.moduleId);
+        this.setTopicId(this.props.topicId);
     }
 
 
@@ -66,6 +69,7 @@ export default class TopicPills extends React.Component {
         this.setLessonId(newProps.lessonId);
         this.setModuleId(newProps.moduleId);
         this.setCourseId(newProps.courseId);
+        this.setTopicId(this.props.topicId);
         this.findAllTopicsForLesson(newProps.courseId, newProps.moduleId, newProps.lessonId);
     }
     findAllTopicsForLesson() {
@@ -96,7 +100,8 @@ export default class TopicPills extends React.Component {
                                       lessonId={this.props.lessonId}
                                       moduleId={this.props.moduleId}
                                       courseId={this.props.courseId}
-                                      delete={this.deleteTopic}/>
+                                      delete={this.deleteTopic}
+                                     topicId={topic.id}/>
             });
         }
         return (

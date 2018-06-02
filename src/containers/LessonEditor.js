@@ -2,13 +2,8 @@ import React,  {Component} from 'react';
 import TopicPills from './TopicPills'
 import {Route} from 'react-router-dom'
 import TopicEditor from "./TopicEditor";
-import {Provider, connect} from 'react-redux'
-import {createStore} from 'redux'
-import {WidgetReducer} from "../reducers/WidgetReducer";
-import {WidgetContainer} from "./WidgetList";
 import LessonService from "../services/LessonService";
 
-let store = createStore(WidgetReducer);
 
 export default class LessonEditor extends Component {
 
@@ -45,13 +40,10 @@ export default class LessonEditor extends Component {
     render() {
         return (
             <div>
-                <h1>Lesson Editor</h1>
                 <TopicPills moduleId={this.state.moduleId} courseId={this.state.courseId} lessonId={this.state.lessonId}/>
                 <div className="col-8">
                     <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId/" component={TopicEditor}></Route>
-                    <Provider store={store}>
-                        <WidgetContainer/>
-                    </Provider>
+
                 </div>
             </div>
         )}}

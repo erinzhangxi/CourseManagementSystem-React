@@ -19,7 +19,7 @@ class WidgetList extends Component {
     render(){
         return(
             <div>
-                <h1>!!!WIDGET LIST RENDERING!!!</h1>
+
                 <div className="row float-right" style={{marginRight:"10px",marginTop:"10px"}}>
                     <button style={{marginRight:"5px"}} className="btn-success btn" hidden={this.props.previewMode} onClick={()=>{this.props.save(this.props.topicId)}} >Save</button>
                     <ToggleButton onClick={()=>{this.props.preview(this.props.topicId,this.props.previewMode)}} value={this.props.previewMode}/>
