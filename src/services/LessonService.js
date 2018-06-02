@@ -23,12 +23,14 @@ export default class ModuleService {
   }
 
 
-    deleteLesson(lessonId) {
-      return fetch(DELETE_LESSON_API + lessonId, {
-        method: 'DELETE'
-      }).then(function (response) {
-        return response;
-      })}
+    deleteLesson(courseId, moduleId, lessonId) {
+        return fetch(LESSON_API_URL.replace('CID', courseId).replace('MID', moduleId)+ lessonId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+            return response;
+        })
+  }
 
       findAllLessons() {
         return fetch(

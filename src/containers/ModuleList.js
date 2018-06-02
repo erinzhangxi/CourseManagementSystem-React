@@ -106,10 +106,10 @@ export default class ModuleList extends Component {
   render() {
     return (
       <Router>
+
           <div className="row">
               <div className="col-4">
         <div>
-
          <p style={title}>Add a new module</p>
           <input onChange={this.titleChanged}
                  value={this.state.module.title}
@@ -127,9 +127,7 @@ export default class ModuleList extends Component {
         </div>
               </div>
 
-                  <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
-
-
+              <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
       </div>
 </Router>
     );

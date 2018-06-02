@@ -21,6 +21,7 @@ export default class LessonTabs
         this.createLesson = this.createLesson.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
+        this.setLessonId = this.setLessonId.bind(this);
     }
 
     setModuleId(moduleId) {
@@ -29,20 +30,25 @@ export default class LessonTabs
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
+    setLessonId(lessonId) {
+        this.setState({lessonId:lessonId});
+    }
     componentDidMount() {
         this.setModuleId(this.props.moduleId);
         this.setCourseId(this.props.courseId);
+        this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setModuleId(newProps.moduleId);
         this.setCourseId(newProps.courseId);
+        this.setLessonId(newProps.lessonId);
         this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
     }
 
-    findAllLessonsForModule() {
+    findAllLessonsForModule(courseId, moduleId) {
         this.lessonService
-            .findAllLessonsForModule(this.props.courseId, this.props.moduleId)
+            .findAllLessonsForModule(courseId, moduleId)
             .then((lessons) => {
                 this.setState({lessons: lessons});
             })
@@ -53,16 +59,16 @@ export default class LessonTabs
         this.lessonService
             .createLesson(this.props.courseId, this.props.moduleId, lesson)
             .then(() => {
-                this.findAllLessonsForModule();
+                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
             });
     }
 
-    deleteLesson(lessonId) {
+    deleteLesson(courseId, moduleId, lessonId) {
         if (window.confirm('Are you sure you want to delete?')) {
             this.lessonService
-                .deleteLesson(lessonId)
+                .deleteLesson(courseId, moduleId, lessonId)
                 .then(() => {
-                    this.findAllLessonsForModule()
+                    this.findAllLessonsForModule(courseId, moduleId)
                 });
         }
     }
@@ -74,13 +80,12 @@ export default class LessonTabs
         let moduleId = this.state.moduleId;
         if(this.state) {
              lessons = this.state.lessons.map((lesson) => {
-                console.log("RENDERING LESSON");
-                console.log({lesson});
                 return <LessonTabItem key={lesson.id}
                                       lesson={lesson}
                                       moduleId={moduleId}
                                       courseId={courseId}
-                                      delete={deleteLesson}/>;
+                                      delete={deleteLesson}
+                                        lessonId={lesson.id}/>;
             });
             return (
                 lessons

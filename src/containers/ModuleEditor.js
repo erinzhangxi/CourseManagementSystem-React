@@ -3,12 +3,7 @@ import LessonTabs from './LessonTabs'
 import LessonService from "../services/LessonService";
 import {Route} from 'react-router-dom'
 import LessonEditor from './LessonEditor'
-
-import {Provider, connect} from 'react-redux'
-import {createStore} from 'redux'
-import {WidgetReducer} from "../reducers/WidgetReducer";
-import {WidgetContainer} from "./WidgetList";
-let store = createStore(WidgetReducer);
+import ModuleService from "../services/ModuleService"
 
 const title = {
     "fontFamily":"Arial",
@@ -28,6 +23,8 @@ extends React.Component {
     this.lessonService = LessonService.instance;
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
+    this.findModuleById = this.findModuleById.bind(this);
+    this.moduleService = ModuleService.instance;
   }
 
   setCourseId(courseId) {
@@ -44,15 +41,22 @@ extends React.Component {
   componentDidMount() {
     this.setCourseId(this.props.match.params.courseId);
     this.setModuleId(this.props.match.params.moduleId);
-    console.log("MODULEEDITOR");
-    console.log(this.props.match.params.courseId);
-    console.log(this.props.match.params.moduleId);
   }
 
-      componentWillReceiveProps(newProps) {
-        this.setCourseId(newProps.match.params.courseId);
-        this.setModuleId(newProps.match.params.moduleId);
+  componentWillReceiveProps(newProps) {
+      this.setCourseId(newProps.match.params.courseId);
+      this.setModuleId(newProps.match.params.moduleId);
+      this.findModuleById(newProps.match.params.moduleId);
   }
+
+    findModuleById(moduleId) {
+      if (moduleId != 'undefined')
+          console.log("CONDITION IN ");
+            this.moduleService.findModuleById(moduleId)
+                .then((module) => {
+                    this.setState({module: module});
+                });
+    }
 
           render() {
             return (
@@ -60,10 +64,9 @@ extends React.Component {
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <h4 style={title}>Module {this.props.match.params.moduleId}</h4>
               </nav>
-              <LessonTabs moduleId={this.props.match.params.moduleId} courseId={this.props.match.params.courseId}/>
-                  <Provider store={store}>
-                      <WidgetContainer/>
-                  </Provider>
+              <LessonTabs moduleId={this.props.match.params.moduleId}
+                          courseId={this.props.match.params.courseId}/>
+
 
               </div>
             );}}

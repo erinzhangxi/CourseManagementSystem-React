@@ -7,6 +7,7 @@ import {createStore} from 'redux'
 import {WidgetReducer} from "../reducers/WidgetReducer";
 import {WidgetContainer} from "./WidgetList";
 import LessonTabs from './LessonTabs'
+import ModuleEditor from "./ModuleEditor";
 
 let store = createStore(WidgetReducer);
 
@@ -104,7 +105,8 @@ export default class CourseEditor
                             </div>
                         </form>
                     </div>
-                            <ModuleList courseId={this.props.match.params.courseId}/>
+                        <ModuleList courseId={this.props.match.params.courseId}/>
+
 
 
                 </div>
