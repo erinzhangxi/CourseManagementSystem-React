@@ -19,7 +19,8 @@ extends React.Component {
         module:'',
         moduleId: '',
         courseId: '',
-        moduleName:''};
+        moduleName:'',
+        lessonId: ''};
     this.lessonService = LessonService.instance;
     this.setCourseId = this.setCourseId.bind(this);
     this.setModuleId = this.setModuleId.bind(this);
@@ -28,30 +29,28 @@ extends React.Component {
   }
 
   setCourseId(courseId) {
-    this.setState(
-      {courseId: courseId}
-    );
-  }
+      this.setState( {courseId: courseId} );}
   setModuleId(moduleId) {
-    this.setState({
-      moduleId: moduleId
-    });
-  }
+      this.setState({ moduleId: moduleId});}
+  setLessonId(lessonId) {
+      this.setState({ lessonId: lessonId});}
 
   componentDidMount() {
     this.setCourseId(this.props.match.params.courseId);
     this.setModuleId(this.props.match.params.moduleId);
+    this.setLessonId(this.props.match.params.lessonId);
   }
 
   componentWillReceiveProps(newProps) {
+      console.log("MODULE LIST RECEIVE NEW PROPS    ");
       this.setCourseId(newProps.match.params.courseId);
       this.setModuleId(newProps.match.params.moduleId);
+      this.setLessonId(newProps.match.params.lessonId);
       this.findModuleById(newProps.match.params.moduleId);
   }
 
     findModuleById(moduleId) {
       if (moduleId != 'undefined')
-          console.log("CONDITION IN ");
             this.moduleService.findModuleById(moduleId)
                 .then((module) => {
                     this.setState({module: module});
@@ -67,6 +66,7 @@ extends React.Component {
               <LessonTabs moduleId={this.props.match.params.moduleId}
                           courseId={this.props.match.params.courseId}/>
 
-
+<br/>
+                  <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}></Route>
               </div>
             );}}

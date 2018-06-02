@@ -29,6 +29,7 @@ class TopicEditor extends React.Component{
     }
 
     componentWillReceiveProps(newProps){
+        console.log("topic editor receive new props");
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);

@@ -3,10 +3,11 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 class LessonTabItem extends Component {
-
+    constructor(props) {
+        super(props);
+    };
     render() {
         return (
-            <Router>
                 <div>
                     <li className="nav-item">
 
@@ -22,8 +23,6 @@ class LessonTabItem extends Component {
                         </div>
                     </li>
                 </div>
-
-            </Router>
 
         )}
 }

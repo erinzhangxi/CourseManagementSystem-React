@@ -37,6 +37,7 @@ export default class CourseEditor
     }
 
     componentWillReceiveProps(newProps){
+        console.log("course editor receive new props");
         if (newProps.match.params.courseId !== null) {
             this.selectCourse(newProps.match.params.courseId);
         }
@@ -70,7 +71,6 @@ export default class CourseEditor
 
     render() {
         return (
-            <Router>
                 <div>
                     <div className="container-fluid">
                         <form>
@@ -110,6 +110,4 @@ export default class CourseEditor
 
 
                 </div>
-
-            </Router>
         );}}

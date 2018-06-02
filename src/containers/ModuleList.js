@@ -46,8 +46,6 @@ export default class ModuleList extends Component {
  }
  setCurrentModuleId(moduleId) {
    this.setState({currentModule: moduleId});
-   console.log("THIS MODULE IS CLICKED");
-   console.log(moduleId);
  }
 
   findAllModulesForCourse() {
@@ -105,8 +103,7 @@ export default class ModuleList extends Component {
 
   render() {
     return (
-      <Router>
-
+ <div>
           <div className="row">
               <div className="col-4">
         <div>
@@ -129,7 +126,7 @@ export default class ModuleList extends Component {
 
               <Route path= "/course/:courseId/module/:moduleId" component={ModuleEditor}/>
       </div>
-</Router>
+ </div>
     );
   }
 }

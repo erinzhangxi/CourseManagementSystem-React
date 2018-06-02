@@ -22,36 +22,43 @@ export default class LessonTabs
         this.titleChanged = this.titleChanged.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
+        this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
+        this.setLessons = this.setLessons.bind(this);
     }
 
-    setModuleId(moduleId) {
-        this.setState({moduleId: moduleId});
-    }
-    setCourseId(courseId) {
-        this.setState({courseId: courseId});
-    }
-    setLessonId(lessonId) {
-        this.setState({lessonId:lessonId});
-    }
     componentDidMount() {
-        this.setModuleId(this.props.moduleId);
         this.setCourseId(this.props.courseId);
+        this.setModuleId(this.props.moduleId);
         this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setModuleId(newProps.moduleId);
-        this.setCourseId(newProps.courseId);
-        this.setLessonId(newProps.lessonId);
-        this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
+        console.log("lesson tabs receive new props");
+        if (this.props !== newProps) {
+            this.setCourseId(newProps.courseId);
+            this.setModuleId(newProps.moduleId);
+            this.setLessonId(newProps.lessonId);
+            this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
+        }
     }
 
+    setModuleId(moduleId) { this.setState({moduleId: moduleId}); }
+    setCourseId(courseId) { this.setState({courseId: courseId}); }
+    setLessonId(lessonId) { this.setState({lessonId:lessonId}); }
+
     findAllLessonsForModule(courseId, moduleId) {
+        if ((courseId != 'undefined') && (moduleId != 'undefined')) {
         this.lessonService
             .findAllLessonsForModule(courseId, moduleId)
             .then((lessons) => {
                 this.setState({lessons: lessons});
-            })
+            })} else {
+            this.setLessons([]);
+
+        }
+    }
+    setLessons(lessons) {
+        this.setState({lessons: lessons})
     }
 
     createLesson() {
@@ -98,7 +105,6 @@ export default class LessonTabs
 
     render() {
         return(
-            <Router>
                 <div>
 
                     <ul className="nav nav-tabs">
@@ -119,9 +125,8 @@ export default class LessonTabs
                     </ul>
                     <br/>
                     <div className='col-8'>
-                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/" component={LessonEditor}></Route>
+
                     </div>
 
                 </div>
-            </Router>
         );}}
