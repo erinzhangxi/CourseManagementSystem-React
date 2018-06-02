@@ -14,6 +14,9 @@ const courseList = {
 class CourseList extends React.Component {
   constructor() {
     super();
+    this.state={
+      courses:[]
+    };
     this.courseService = CourseService.instance;
     this.titleChanged = this.titleChanged.bind(this);
     this.createCourse = this.createCourse.bind(this);
@@ -49,13 +52,18 @@ class CourseList extends React.Component {
     });
   }
   createCourse() {
+      let newCourse = {title: 'new course'};
+      if (this.state.course.title !== '') {
+          newCourse = this.state.course;
+      }
     this.courseService
-      .createCourse(this.state.course)
+      .createCourse(newCourse)
       .then(() => { this.findAllCourses(); });
   }
   deleteCourse(courseId) {
     this.courseService
-      .deleteCourse(courseId);
+      .deleteCourse(courseId)
+        .then(() => { this.findAllCourses(); });
   }
   render() {
     return (
