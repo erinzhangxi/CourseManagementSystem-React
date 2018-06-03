@@ -28,7 +28,6 @@ export default class LessonEditor extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("LESSON EDITOR RECEIVE NEW PROPS");
         if (this.props !== newProps) {
             this.setCourseId(newProps.match.params.courseId);
             this.setModuleId(newProps.match.params.moduleId);

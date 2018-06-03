@@ -1,7 +1,6 @@
 import React from 'react'
 import ModuleList from './ModuleList'
 import CourseService from "../services/CourseService";
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 const title = {
     "fontFamily":"Arial",
@@ -29,7 +28,6 @@ export default class CourseEditor
     }
 
     componentWillReceiveProps(newProps){
-        console.log("course editor receive new props");
         if (newProps.match.params.courseId !== null) {
             this.selectCourse(newProps.match.params.courseId);
         }

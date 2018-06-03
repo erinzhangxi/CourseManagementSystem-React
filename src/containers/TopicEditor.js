@@ -3,6 +3,7 @@ import {WidgetContainer} from "./WidgetList";
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {WidgetReducer} from "../reducers/WidgetReducer";
+const store =createStore(WidgetReducer);
 
 class TopicEditor extends React.Component{
 
@@ -45,14 +46,16 @@ class TopicEditor extends React.Component{
         return(
             <div>
                 <Provider store={store}>
-                    <WidgetContainer/>
+                    <WidgetContainer
+                        topic={this.state.topicId}/>
                 </Provider>
+
             </div>
     )
 
     }
 }
 
-const store =createStore(WidgetReducer);
+
 
 export default TopicEditor;

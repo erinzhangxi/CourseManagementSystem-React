@@ -1,9 +1,7 @@
 import React,  {Component}  from 'react'
 import LessonService from "../services/LessonService";
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import LessonTabItem from './../components/LessonTabItem'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import LessonEditor from "./LessonEditor";
 
 export default class LessonTabs
     extends Component {
@@ -33,7 +31,6 @@ export default class LessonTabs
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("lesson tabs receive new props");
         if (this.props !== newProps) {
             this.setCourseId(newProps.courseId);
             this.setModuleId(newProps.moduleId);
@@ -47,7 +44,7 @@ export default class LessonTabs
     setLessonId(lessonId) { this.setState({lessonId:lessonId}); }
 
     findAllLessonsForModule(courseId, moduleId) {
-        if ((courseId != 'undefined') && (moduleId != 'undefined')) {
+        if ((courseId !== 'undefined') && (moduleId !== 'undefined')) {
         this.lessonService
             .findAllLessonsForModule(courseId, moduleId)
             .then((lessons) => {

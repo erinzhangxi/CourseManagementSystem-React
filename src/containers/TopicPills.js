@@ -2,10 +2,6 @@ import React from 'react';
 import TopicService from "../services/TopicService"
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import TopicPillItem from "../components/TopicPillItem";
-import TopicEditor from './TopicEditor'
-import {Route} from 'react-router-dom'
-import ModuleEditor from "./ModuleEditor";
-
 
 export default class TopicPills extends React.Component {
     constructor(props) {
@@ -77,7 +73,7 @@ export default class TopicPills extends React.Component {
         let moduleId = this.props.moduleId;
         let lessonId = this.props.lessonId;
 
-        if ((courseId !== undefined) && (moduleId !== undefined) && (lessonId !== undefined)) {
+        if ((courseId != undefined) && (moduleId != undefined) && (lessonId != undefined)) {
         this.topicService
             .findAllTopicsForLesson(courseId, moduleId, lessonId)
             .then((topics) => {this.setTopics(topics);});
@@ -91,8 +87,6 @@ export default class TopicPills extends React.Component {
         let lessonId = this.props.lessonId;
         let topics = null;
 
-        console.log("TOPIC PILLS");
-        console.log(this.state.topics);
         if (this.state) {
             topics = this.state.topics.map((topic) => {
                 return <TopicPillItem key={topic.id}

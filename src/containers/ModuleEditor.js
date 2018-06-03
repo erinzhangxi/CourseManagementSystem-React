@@ -42,7 +42,6 @@ extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-      console.log("MODULE LIST RECEIVE NEW PROPS    ");
       this.setCourseId(newProps.match.params.courseId);
       this.setModuleId(newProps.match.params.moduleId);
       this.setLessonId(newProps.match.params.lessonId);
@@ -50,7 +49,7 @@ extends React.Component {
   }
 
     findModuleById(moduleId) {
-      if (moduleId != 'undefined')
+      if (moduleId !== 'undefined')
             this.moduleService.findModuleById(moduleId)
                 .then((module) => {
                     this.setState({module: module});
