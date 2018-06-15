@@ -1,11 +1,6 @@
 {
-  "name": "@coreui/react",
-  "version": "1.0.10",
-  "description": "Open Source Bootstrap Admin Template",
-  "author": "Łukasz Holeczek",
-  "homepage": "http://coreui.io",
-  "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
+  "name": "wbdv-react",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "babel-core": "6.26.0",
