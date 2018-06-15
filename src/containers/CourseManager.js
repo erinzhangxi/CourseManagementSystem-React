@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import CourseEditor from './CourseEditor'
 import CourseList from './CourseList'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import Login from './../components/Login'
+import Signup from './../components/Signup'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 export default class CourseManager
     extends Component {
@@ -14,13 +17,23 @@ export default class CourseManager
         return (
             <Router>
                 <div className="container-fluid">
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand" href="/courses">Course Manager</a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
 
-                    </nav>
+                    <Navbar inverse fluid >
+
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <a className="navbar-brand" href="/courses">Course Manager</a>
+                            </Navbar.Brand>
+                        </Navbar.Header>
+
+
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="/signup">Signup</NavItem>
+                            <NavItem eventKey={2} href="/login">Already have an account? Log in herer</NavItem>
+                        </Nav>
+
+
+                    </Navbar>
 
                     <Route path="/courses/"
                            component={CourseList}>
@@ -29,6 +42,8 @@ export default class CourseManager
                     <Route path="/course/:courseId"
                            component={CourseEditor}>
                     </Route>
+                    <Route exact path="/login" name="Login Page" component={Login}/>
+                    <Route exact path="/signup" name="Register Page" component={Signup}/>
 
                 </div>
             </Router>

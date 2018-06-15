@@ -2,45 +2,45 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 class CourseRow extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state={id:''};
-  }
+    constructor(props) {
+        super(props)
+        this.state={id:''};
+    }
 
-  ComponentDidMount() {
-    this.setState({id: this.props.course.id});
-  }
+    ComponentDidMount() {
+        this.setState({id: this.props.course.id});
+    }
 
-  render() {
-    return (
+    render() {
+        return (
 
-      <div className="container">
-      <div className="row">
-        <div className="col-4">
+            <div className="container">
+                <div className="row">
+                    <div className="col-4">
 
-        <Link to={`/course/${this.props.course.id}`}>
-          {this.props.course.title}
-        </Link>
-        </div>
-        <div className="col-3">
-        me
-        </div>
-        <div className="col-3">
-        {this.props.course.modified}
-        </div>
-        <div className="col-2">
+                        <Link to={`/course/${this.props.course.id}`}>
+                            {this.props.course.title}
+                        </Link>
+                    </div>
+                    <div className="col-3">
+                        me
+                    </div>
+                    <div className="col-3">
+                        {this.props.course.modified}
+                    </div>
+                    <div className="col-2">
         <span className="float-right">
          <button onClick={() =>
-       {this.props.delete(this.props.course.id)}}><i className="fa fa-trash"></i></button>
+         {this.props.delete(this.props.course.id)}}><i className="fa fa-trash"></i></button>
         <button><i className="fa fa-pencil"></i></button>
         </span>
-        </div>
-        </div>
-        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
-    )
-  }
+        )
+    }
 }
 export default CourseRow;
