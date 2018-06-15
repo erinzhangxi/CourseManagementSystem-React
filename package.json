@@ -22,7 +22,7 @@
     "style-loader": "0.20.1",
     "uglify-js": "3.3.9",
     "url-loader": "0.6.2",
-    "webpack": "3.10.0"
+    "webpack": "^3.10.0"
   },
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
