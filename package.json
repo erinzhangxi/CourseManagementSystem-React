@@ -40,7 +40,8 @@
     "react-transition-group": "2.2.1",
     "reactstrap": "5.0.0-beta",
     "redux": "^4.0.0",
-    "simple-line-icons": "2.4.1"
+    "simple-line-icons": "2.4.1",
+    "webpack-dev-server": "^3.1.4"
   },
   "scripts": {
     "dev": "webpack -d --progress --watch --profile --json > compilation-stats.json --env.dev",
