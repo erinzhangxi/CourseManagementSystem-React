@@ -38,7 +38,7 @@ export const add = (topicId,dispatch) => (
 )
 
 
-export const setTopicId = (dispatch, topicId) => {
+export const setTopicId = (topicId, dispatch) => {
     dispatch({
         type: constants.SET_TOPIC_ID,
         topicId: topicId
@@ -97,6 +97,7 @@ export const findAllWidgetsForTopic = (dispatch, topicId) => {
             widgets: widgets
         }))
 }
+
 export const search = (searchQuery,dispatch)=>(
     fetch("https://www.googleapis.com/customsearch/v1?key=AIzaSyCG-dD8kckSHXcOJfE82mZzRmU5l2J0b5o&cx=017661173743464904363:okgv-u30f8q&q=QUERY".replace("QUERY",searchQuery))
         .then(response => (response.json()))

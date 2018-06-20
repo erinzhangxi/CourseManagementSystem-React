@@ -1,7 +1,10 @@
 import * as constants from "../constants/index"
 
 export const WidgetReducer = (state={
-    widgets:[],topicId:"",preview:false}, action)=>{
+    widgets:[],
+    topicId:"",
+    preview:false
+    }, action)=>{
     switch (action.type){
 
         case 'FIND_WIDGETS_TOPIC':return{
@@ -30,13 +33,13 @@ export const WidgetReducer = (state={
             topicId:action.topicId
         }
 
-        case constants.SAVE: fetch('http://localhost:8080/api/topic/TID/widget'.replace('TID',action.topicId),{
+        case constants.SAVE: fetch('http://localhost:8080/api/widget/save',{
             method:'POST',
             body:JSON.stringify(state.widgets),
             headers:{
                 'content-type': 'application/json'
             }
-        })
+        });
             return state;
 
         case constants.SET_TOPIC_ID:
@@ -47,13 +50,11 @@ export const WidgetReducer = (state={
             }
 
         case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
-            return {
-                widgets: action.widgets,
-                preview: state.preview,
-                topicId: state.topicId
-            }
-
-            return state;
+            newState = Object.assign({}, state)
+            newState.widgets = action.widgets;
+            newState.topicId = state.topicId;
+            newState.preview = state.preview;
+            return newState
 
         case constants.SELECT_WIDGET_TYPE:
             return {

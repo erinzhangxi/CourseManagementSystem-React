@@ -19,38 +19,33 @@ export default class ModuleList extends Component {
     this.state = {
       module: { title: '' },
       modules: [],
-      currentModule: 0,
-      courseId: this.props.courseId
+      currentModule: 0
     };
-    this.setCourseId =
-          this.setCourseId.bind(this);
+
     this.setCurrentModuleId = this.setCurrentModuleId.bind(this);
     this.createModule = this.createModule.bind(this);
     this.titleChanged = this.titleChanged.bind(this);
     this.deleteModule = this.deleteModule.bind(this);
     this.moduleService = ModuleService.instance;
-    this.findAllModules = this.findAllModules.bind(this);
     this.findAllModulesForCourse = this.findAllModulesForCourse.bind(this);
 
   }
-  setCourseId(courseId) {
-       this.setState({courseId: courseId});
-   }
+
   componentDidMount() {
-    this.setCourseId(this.props.courseId);
+      this.findAllModulesForCourse(this.props.courseId)
   }
 
   componentWillReceiveProps(newProps){
-     this.setCourseId(newProps.courseId);
      this.findAllModulesForCourse(newProps.courseId)
  }
+
  setCurrentModuleId(moduleId) {
    this.setState({currentModule: moduleId});
  }
 
-  findAllModulesForCourse() {
+  findAllModulesForCourse(courseId) {
     this.moduleService
-      .findAllModulesForCourse(this.props.courseId)
+      .findAllModulesForCourse(courseId)
       .then((modules) => {this.setModules(modules)});
   }
 
@@ -58,19 +53,11 @@ export default class ModuleList extends Component {
     this.setState({modules: modules});
   }
 
-  findAllModules() {
-    this.moduleService
-      .findAllModules()
-      .then((modules) => {
-        this.setModules(modules);
-      })
-  }
-
   createModule() {
     this.moduleService
       .createModule(this.props.courseId, this.state.module)
         .then(() => {
-        this.findAllModulesForCourse();
+        this.findAllModulesForCourse(this.props.courseId);
     });
   }
   deleteModule(moduleId, courseId) {
@@ -78,7 +65,7 @@ export default class ModuleList extends Component {
     this.moduleService
       .deleteModule(moduleId)
         .then(() => {
-            this.findAllModulesForCourse()
+            this.findAllModulesForCourse(this.props.courseId)
         });
         }
   }

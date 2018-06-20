@@ -6,30 +6,33 @@ import ToggleButton from 'react-toggle-button'
 
 class WidgetList extends Component {
     constructor(props) {
-        super(props);
 
-        console.log("##########WIDGET LIST CONSTRUCTORS################");
-        console.log(this.props.topicId);
+        super(props);
+        this.state = {
+            topicId:''
+        };
+        this.props.setTopicId(this.props.topic);
+        this.props.findAllWidgetsForTopic(this.props.topic);
     }
+
     componentDidMount(){
 
     }
 
     componentWillReceiveProps(newProps){
         if(newProps.topicId!==this.props.topicId) {
-            this.props.findWidgetsForTopic(newProps.topicId);
+            this.props.setTopicId(newProps.topic);
+            this.props.findAllWidgetsForTopic(newProps.topicId);
         }
     }
     render(){
         let input;
         return(
             <div>
-                <h1> Widget List ({this.props.widgets.length}) </h1>
+                <h3> Number of Widget(s) ({this.props.widgets.length}) </h3>
                 <br/>
-<h1>DEBUG WIDGETLIST</h1>
-                <h1>{this.props.topicId}</h1>
-                <h1>END</h1>
-                <div className="row float-right" style={{marginRight:"10px",marginTop:"10px"}}>
+
+                <div className="row float-right">
                     <button style={{marginRight:"5px"}}
                             className="btn-success btn"
                             hidden={this.props.previewMode}
@@ -52,9 +55,9 @@ class WidgetList extends Component {
 
                     <button hidden={this.props.previewMode}
                             className="btn float-right"
-                            style={{background:'#ea2a2a',marginTop:"10px",marginBottom:"20px"}}
+                            style={{marginTop:"10px",marginBottom:"20px"}}
                             onClick={()=>{this.props.add(this.props.topicId)}}>
-                        <i className="fa fa-plus-circle"></i></button>
+                        <i className="fa fa-plus" aria-hidden="true"></i></button>
                 </div>
             </div>
         )
@@ -64,16 +67,16 @@ class WidgetList extends Component {
 }
 
 const dispatchToPropsMapper =(dispatch)=>({
-    findWidgetsForTopic: (topicId) => Actions.findWidgetsForTopic(topicId,dispatch),
+    findAllWidgetsForTopic: (topicId) => Actions.findAllWidgetsForTopic(dispatch,topicId),
     save: (topicId)=> Actions.save(topicId, dispatch),
     add: (topicId) => Actions.add(topicId, dispatch),
     preview: (topicId,previewMode) => Actions.preview(topicId,previewMode,dispatch),
-    setTopicId: (topicId) => Actions.setTopicId(dispatch, topicId)
+    setTopicId: (topicId) => Actions.setTopicId(topicId, dispatch)
 })
 
-const stateToPropsMapper = (state,ownProps) => (
+const stateToPropsMapper = (state) => (
     {
-        topicId: ownProps.topicId,
+        topicId: state.topicId,
         widgets:state.widgets,
         previewMode:state.preview
     }

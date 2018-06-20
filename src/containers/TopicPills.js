@@ -7,26 +7,29 @@ export default class TopicPills extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            courseId: '',
-            moduleId: '',
-            lessonId: '',
             topicId: '',
             topics: [],
             topic: {title: ''}
         };
-        this.setModuleId = this.setModuleId.bind(this);
-        this.setCourseId = this.setCourseId.bind(this);
-        this.setLessonId = this.setLessonId.bind(this);
+
         this.setTopicId = this.setTopicId.bind(this);
         this.deleteTopic = this.deleteTopic.bind(this);
         this.topicService = TopicService.instance;
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
+        this.findAllTopicsForLesson = this.findAllTopicsForLesson.bind(this);
     }
 
-    setLessonId(lessonId) { this.setState({lessonId:lessonId});}
-    setModuleId(moduleId) { this.setState({moduleId: moduleId});}
-    setCourseId(courseId) { this.setState({courseId: courseId});}
+    componentDidMount() {
+        this.setTopicId(this.props.topicId);
+        this.findAllTopicsForLesson(this.props.courseId, this.props.lessonId, this.props.moduleId);
+    }
+    componentWillReceiveProps(newProps) {
+        this.setTopicId(newProps.topicId);
+        this.findAllTopicsForLesson(newProps.courseId, newProps.moduleId, newProps.lessonId);
+        this.renderTopics(newProps.courseId, newProps.moduleId, newProps.lessonId);
+    }
+
     setTopicId(topicId) { this.setState({topicId: topicId}); }
     setTopicTitle(event) {
         this.setState({topic: {
@@ -41,7 +44,7 @@ export default class TopicPills extends React.Component {
         this.topicService
             .createTopic(this.props.courseId, this.props.moduleId, this.props.lessonId, newTopic)
             .then(() => {
-                this.findAllTopicsForLesson();
+                this.findAllTopicsForLesson(this.props.courseId, this.props.moduleId, this.props.lessonId);
             });
     }
     deleteTopic(topicId) {
@@ -49,30 +52,12 @@ export default class TopicPills extends React.Component {
             this.topicService
                 .deleteTopic(topicId)
                 .then(() => {
-                    this.findAllTopicsForLesson();
+                    this.findAllTopicsForLesson(this.props.courseId, this.props.moduleId, this.props.lessonId);
                 });
         }
     }
-    componentDidMount() {
-        this.setCourseId(this.props.courseId);
-        this.setLessonId(this.props.lessonId);
-        this.setModuleId(this.props.moduleId);
-        this.setTopicId(this.props.topicId);
-    }
 
-
-    componentWillReceiveProps(newProps) {
-        this.setLessonId(newProps.lessonId);
-        this.setModuleId(newProps.moduleId);
-        this.setCourseId(newProps.courseId);
-        this.setTopicId(this.props.topicId);
-        this.findAllTopicsForLesson(newProps.courseId, newProps.moduleId, newProps.lessonId);
-    }
-    findAllTopicsForLesson() {
-        let courseId = this.props.courseId;
-        let moduleId = this.props.moduleId;
-        let lessonId = this.props.lessonId;
-
+    findAllTopicsForLesson(courseId, moduleId, lessonId) {
         if ((courseId != undefined) && (moduleId != undefined) && (lessonId != undefined)) {
         this.topicService
             .findAllTopicsForLesson(courseId, moduleId, lessonId)
@@ -81,11 +66,8 @@ export default class TopicPills extends React.Component {
             this.setTopics([])
         }
     }
-    renderTopics() {
-        let courseId = this.props.courseId;
-        let moduleId = this.props.moduleId;
-        let lessonId = this.props.lessonId;
-        let topics = null;
+    renderTopics(courseId, moduleId, lessonId) {
+        let topics;
 
         if (this.state) {
             topics = this.state.topics.map((topic) => {
@@ -113,7 +95,7 @@ export default class TopicPills extends React.Component {
                     <ul className="nav nav-pills justify-content-right" >
                         {this.renderTopics()}
                         <li id="addTopicFld" className="nav-item">
-                            <a className="nav-link" href="localhost:3000/courses/:courseId/module/:moduleId">
+                            <a className="nav-link" href="api/courses/:courseId/module/:moduleId">
                                 <div className='row'>
                                     <div className='col-8'>
                                         <input className='form-control form-control-sm'

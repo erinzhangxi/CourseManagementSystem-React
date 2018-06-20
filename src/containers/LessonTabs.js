@@ -8,41 +8,26 @@ export default class LessonTabs
     constructor(props) {
         super(props);
         this.state = {
-            courseId: '',
-            moduleId: '',
             lesson: { title: '' },
             lessons: []
         };
         this.lessonService = LessonService.instance;
-        this.setModuleId = this.setModuleId.bind(this);
-        this.setCourseId = this.setCourseId.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
-        this.setLessonId = this.setLessonId.bind(this);
         this.findAllLessonsForModule = this.findAllLessonsForModule.bind(this);
         this.setLessons = this.setLessons.bind(this);
     }
 
     componentDidMount() {
-        this.setCourseId(this.props.courseId);
-        this.setModuleId(this.props.moduleId);
-        this.setLessonId(this.props.lessonId);
+        this.findAllLessonsForModule(this.props.courseId, this.props.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
         if (this.props !== newProps) {
-            this.setCourseId(newProps.courseId);
-            this.setModuleId(newProps.moduleId);
-            this.setLessonId(newProps.lessonId);
             this.findAllLessonsForModule(newProps.courseId, newProps.moduleId);
         }
     }
-
-    setModuleId(moduleId) { this.setState({moduleId: moduleId}); }
-    setCourseId(courseId) { this.setState({courseId: courseId}); }
-    setLessonId(lessonId) { this.setState({lessonId:lessonId}); }
-
     findAllLessonsForModule(courseId, moduleId) {
         if ((courseId !== 'undefined') && (moduleId !== 'undefined')) {
         this.lessonService
@@ -63,7 +48,7 @@ export default class LessonTabs
         this.lessonService
             .createLesson(this.props.courseId, this.props.moduleId, lesson)
             .then(() => {
-                this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
+                this.findAllLessonsForModule(this.props.courseId, this.props.moduleId);
             });
     }
 
@@ -80,8 +65,8 @@ export default class LessonTabs
     renderLessons() {
         let lessons = null;
         let deleteLesson = this.deleteLesson;
-        let courseId = this.state.courseId;
-        let moduleId = this.state.moduleId;
+        let courseId = this.props.courseId;
+        let moduleId = this.props.moduleId;
         if(this.state) {
              lessons = this.state.lessons.map((lesson) => {
                 return <LessonTabItem key={lesson.id}

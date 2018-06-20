@@ -14,6 +14,13 @@ export default class TopicService {
             this[_singleton] = new TopicService(_singleton);
         return this[_singleton]
     }
+
+    findAllTopicsForLesson(courseId, moduleId,lessonId) {
+        return fetch(TOPIC_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID',lessonId))
+            .then(function(response){
+                return response.json();
+            });
+    }
     createTopic(courseId, moduleId, lessonId, topic) {
         return fetch(TOPIC_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID',lessonId), {
             body: JSON.stringify(topic),
@@ -29,15 +36,4 @@ export default class TopicService {
         });
     }
 
-
-    findAllTopicsForLesson(courseId, moduleId,lessonId) {
-        return fetch(TOPIC_API_URL.replace('CID', courseId).replace('MID', moduleId).replace('LID',lessonId))
-            .then(function (response) {
-                if(response.status === 500) {
-                    return null;
-                } else {
-                    return response.json();
-                }
-            });
-    }
 }

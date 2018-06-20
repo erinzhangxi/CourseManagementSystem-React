@@ -31,14 +31,14 @@ export default class ModuleService {
             return response;
         })
   }
-
-      findAllLessons() {
-        return fetch(
-          DELETE_LESSON_API
-        ).then(function (response) {
-            return response.json();
-          })
-      }
+      //
+      // findAllLessons() {
+      //   return fetch(
+      //     DELETE_LESSON_API
+      //   ).then(function (response) {
+      //       return response.json();
+      //     })
+      // }
 
   findAllLessonsForModule(courseId, moduleId) {
     return fetch(
